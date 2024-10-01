@@ -253,23 +253,23 @@ public class Analisador_lexico implements Analisador_lexicoConstants {
                     break;
                 case CONSTANTES_INT:
                     n = jj_consume_token(CONSTANTES_INT);
-                    texto += "Numero int: " + n.image;
+                    texto += "Numero int: " + n.image + "\n";
                     break;
                 case CONSTANTES_FLOAT:
                     n = jj_consume_token(CONSTANTES_FLOAT);
-                    texto += "Numero float: " + n.image;
+                    texto += "Numero float: " + n.image+ "\n";
                     break;
                 case IDENTIFICADOR:
                     n = jj_consume_token(IDENTIFICADOR);
-                    texto += "Identificador: " + n.image;
+                    texto += "Identificador: " + n.image+ "\n";
                     break;
                 case CONSTANTE_LITARAL_ASPAS:
                     jj_consume_token(CONSTANTE_LITARAL_ASPAS);
-                    texto += "Simbolo: CONST LIT ASPAS";
+                    texto += "Simbolo: CONST LIT ASPAS\n";
                     break;
                 case CONSTANTE_LITARAL_APOSTROFO:
                     jj_consume_token(CONSTANTE_LITARAL_APOSTROFO);
-                    texto += "Simbolo: CONST LIT APOSTROFO";
+                    texto += "Simbolo: CONST LIT APOSTROFO\n";
                     break;                
                 case ERRO_LEXICO_SIMBOLO:
                     n = jj_consume_token(ERRO_LEXICO_SIMBOLO);
