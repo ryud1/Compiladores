@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 public class Trabalho_Analisador_Sintatico_Artur_Pedro_Ryudi {
 
     public static void main(String[] args) {
-        Tela tela = new Tela();
+        Tela2 tela = new Tela2();
         tela.setVisible(true);
     }
 }
