@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: com.mycompany.trabalho_analisador_sintatico_artur_pedro_ryud
+ i.Tela
+

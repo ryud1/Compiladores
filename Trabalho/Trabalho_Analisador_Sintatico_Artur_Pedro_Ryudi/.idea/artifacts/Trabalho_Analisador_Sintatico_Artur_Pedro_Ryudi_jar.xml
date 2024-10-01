@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Trabalho_Analisador_Sintatico_Artur_Pedro_Ryudi:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Trabalho_Analisador_Sintatico_Artur_Pedro_Ryudi_jar</output-path>
+    <root id="archive" name="Trabalho_Analisador_Sintatico_Artur_Pedro_Ryudi.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="Trabalho_Analisador_Sintatico_Artur_Pedro_Ryudi" />
+    </root>
+  </artifact>
+</component>
