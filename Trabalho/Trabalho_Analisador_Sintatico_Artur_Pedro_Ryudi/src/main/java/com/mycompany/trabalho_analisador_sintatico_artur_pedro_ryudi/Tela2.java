@@ -9,11 +9,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.geom.Rectangle2D;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.Caret;
 /**
  *
@@ -26,8 +30,10 @@ public class Tela2 extends javax.swing.JFrame {
      */
     public Tela2() {
         initComponents();
+        this.tln = new TextLineNumber(painelEditavel);
         this.setLocationRelativeTo(null);
         this.setTitle("Compilador");
+        jScrollPane1.setRowHeaderView(tln);
         painelEditavel.setText("");
     }
 
@@ -37,7 +43,11 @@ public class Tela2 extends javax.swing.JFrame {
     private String selectPainelEditavel;
     private String bufferPainelEditavel;
     
-        private Analisador_lexico analizador;
+    private Analisador_lexico analizador;
+    
+    private JTextArea indice = new JTextArea();
+    private TextLineNumber tln;
+
 
     public String getPainelTextSaved() {
         return painelTextSaved;
@@ -103,7 +113,11 @@ public class Tela2 extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setAlignmentX(0.0F);
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
         painelEditavel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        painelEditavel.setAutoscrolls(false);
         painelEditavel.setMinimumSize(new java.awt.Dimension(13, 20));
         painelEditavel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -127,6 +141,7 @@ public class Tela2 extends javax.swing.JFrame {
         jScrollPane3.setColumnHeaderView(null);
         jScrollPane3.setPreferredSize(new java.awt.Dimension(60, 30));
 
+        terminal.setEditable(false);
         terminal.setColumns(1);
         terminal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         terminal.setRows(1);
@@ -145,7 +160,7 @@ public class Tela2 extends javax.swing.JFrame {
         nomeArquivo.setText("Nome do arquivo");
         nomeArquivo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
-        botaoCompilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/gerramenta 32bit.png"))); // NOI18N
+        botaoCompilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/gerramenta_32bit.png"))); // NOI18N
         botaoCompilar.setAlignmentY(0.0F);
         botaoCompilar.setMargin(new java.awt.Insets(2, 0, 3, 0));
         botaoCompilar.setMaximumSize(new java.awt.Dimension(32, 32));
@@ -157,7 +172,7 @@ public class Tela2 extends javax.swing.JFrame {
             }
         });
 
-        botaoExecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/PLAY.png"))); // NOI18N
+        botaoExecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Play.png"))); // NOI18N
         botaoExecutar.setAlignmentY(0.0F);
         botaoExecutar.setMargin(new java.awt.Insets(2, 0, 3, 0));
         botaoExecutar.setMaximumSize(new java.awt.Dimension(32, 32));
@@ -169,35 +184,35 @@ public class Tela2 extends javax.swing.JFrame {
             }
         });
 
-        botaoIconSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Save(1).png"))); // NOI18N
+        botaoIconSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Save_(1).png"))); // NOI18N
         botaoIconSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoIconSalvarActionPerformed(evt);
             }
         });
 
-        botaoIconCortar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Cut (1).png"))); // NOI18N
+        botaoIconCortar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Cut_(1).png"))); // NOI18N
         botaoIconCortar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoIconCortarActionPerformed(evt);
             }
         });
 
-        botaoIconCopiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Copy (1).png"))); // NOI18N
+        botaoIconCopiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Copy_(1).png"))); // NOI18N
         botaoIconCopiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoIconCopiarActionPerformed(evt);
             }
         });
 
-        botaoIconColar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Paste (1).png"))); // NOI18N
+        botaoIconColar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Paste_(1).png"))); // NOI18N
         botaoIconColar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoIconColarActionPerformed(evt);
             }
         });
 
-        botaoIconBoia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Boia (1).png"))); // NOI18N
+        botaoIconBoia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Boia_(1).png"))); // NOI18N
         botaoIconBoia.setPreferredSize(new java.awt.Dimension(32, 32));
         botaoIconBoia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,14 +220,14 @@ public class Tela2 extends javax.swing.JFrame {
             }
         });
 
-        botaoIconNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/New (1).png"))); // NOI18N
+        botaoIconNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/New_(1).png"))); // NOI18N
         botaoIconNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoIconNovoActionPerformed(evt);
             }
         });
 
-        botaoIconAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Open(1).png"))); // NOI18N
+        botaoIconAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Open_(1).png"))); // NOI18N
         botaoIconAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoIconAbrirActionPerformed(evt);
@@ -266,21 +281,22 @@ public class Tela2 extends javax.swing.JFrame {
                     .addComponent(botaoIconAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoIconNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoIconCopiar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ContadorLC)
                     .addComponent(nomeArquivo)))
         );
 
-        JTextArea indice = new JTextArea();
+        indice.setFocusable(false);
+        indice.setEditable(false);
+        indice.setAutoscrolls(false);
         indice.setFont(new java.awt.Font("Segoe UI", 0, 18));
         indice.setBackground(Color.LIGHT_GRAY);
         indice.setText("1");
-        jScrollPane1.setRowHeaderView(indice);
 
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -681,23 +697,7 @@ public class Tela2 extends javax.swing.JFrame {
 
     private void painelEditavelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelEditavelMouseClicked
         Caret pointer = painelEditavel.getCaret();
-        if (pointer.getMagicCaretPosition() != null) {
-            String contador = "Linha: "
-                    + (((pointer.getMagicCaretPosition().y) / 16) + 1)
-                    + " | Coluna: "
-                    + (((pointer.getMagicCaretPosition().x) / 7) + 1);
-            ContadorLC.setText(contador);
-        }
-        selectPainelEditavel = painelEditavel.getSelectedText();
-    }//GEN-LAST:event_painelEditavelMouseClicked
-
-    private void painelEditavelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_painelEditavelKeyReleased
-        Caret pointer = painelEditavel.getCaret();
         String linhaCount = "";
-        JTextArea indice = new JTextArea();
-        indice.setBackground(Color.LIGHT_GRAY);
-        indice.setFont(new java.awt.Font("Segoe UI", 0, 18));
-
         if (pointer.getMagicCaretPosition() != null) {
             String contador = "Linha: "
                     + (((pointer.getMagicCaretPosition().y) / 25) + 1)
@@ -709,21 +709,48 @@ public class Tela2 extends javax.swing.JFrame {
             }
         }
         indice.setText(linhaCount);
-        jScrollPane1.setRowHeaderView(indice);
+        selectPainelEditavel = painelEditavel.getSelectedText();
+        painelEditavel.requestFocus();
+    }//GEN-LAST:event_painelEditavelMouseClicked
+
+    private void painelEditavelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_painelEditavelKeyReleased
+        Caret pointer = painelEditavel.getCaret();
+        String linhaCount = "";
+        if (pointer.getMagicCaretPosition() != null) {
+            String contador = "Linha: "
+                    + (((pointer.getMagicCaretPosition().y) / 25) + 1)
+                    + " | Coluna: "
+                    + (((pointer.getMagicCaretPosition().x) / 9) + 1);
+            ContadorLC.setText(contador);
+            for(int i = 0;i<painelEditavel.getLineCount();i++){
+                linhaCount += i+1 + "\n";
+            }
+        }
+        indice.setText(linhaCount);
         selectPainelEditavel = painelEditavel.getSelectedText();
         painelEditavel.requestFocus();
     }//GEN-LAST:event_painelEditavelKeyReleased
 
     private void painelEditavelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelEditavelMouseReleased
         Caret pointer = painelEditavel.getCaret();
+        String linhaCount = "";
         if (pointer.getMagicCaretPosition() != null) {
             String contador = "Linha: "
-                    + (((pointer.getMagicCaretPosition().y) / 16) + 1)
+                    + (((pointer.getMagicCaretPosition().y) / 25) + 1)
                     + " | Coluna: "
-                    + (((pointer.getMagicCaretPosition().x) / 7) + 1);
+                    + (((pointer.getMagicCaretPosition().x) / 9) + 1);
             ContadorLC.setText(contador);
+            for(int i = 0;i<painelEditavel.getLineCount();i++){
+                linhaCount += i+1 + "\n";
+            }
         }
-        selectPainelEditavel = painelEditavel.getSelectedText();
+        Point p = new Point();
+        Point pi = pointer.getMagicCaretPosition();
+        indice.setText(linhaCount);
+        
+        //p.setLocation(pointer.getMagicCaretPosition());
+        indice.setFocusable(true);
+        indice.requestFocusInWindow();  
     }//GEN-LAST:event_painelEditavelMouseReleased
 
     private void painelEditavelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_painelEditavelKeyPressed
