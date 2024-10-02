@@ -113,9 +113,6 @@ public class Tela2 extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setAlignmentX(0.0F);
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
         painelEditavel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         painelEditavel.setAutoscrolls(false);
         painelEditavel.setMinimumSize(new java.awt.Dimension(13, 20));

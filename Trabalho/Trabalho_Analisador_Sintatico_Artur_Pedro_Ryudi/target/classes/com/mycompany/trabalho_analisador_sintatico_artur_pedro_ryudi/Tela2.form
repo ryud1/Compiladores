@@ -260,10 +260,6 @@
       </Layout>
       <SubComponents>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-          <Properties>
-            <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
-            <Property name="verticalScrollBarPolicy" type="int" value="22"/>
-          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="indice.setFocusable(false);&#xa;indice.setEditable(false);&#xa;indice.setAutoscrolls(false);&#xa;indice.setFont(new java.awt.Font(&quot;Segoe UI&quot;, 0, 18));&#xa;indice.setBackground(Color.LIGHT_GRAY);&#xa;indice.setText(&quot;1&quot;);"/>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
