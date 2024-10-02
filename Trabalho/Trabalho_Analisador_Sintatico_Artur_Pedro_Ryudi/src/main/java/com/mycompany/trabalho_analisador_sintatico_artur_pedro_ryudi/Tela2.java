@@ -44,8 +44,6 @@ public class Tela2 extends javax.swing.JFrame {
     private String bufferPainelEditavel;
     
     private Analisador_lexico analizador;
-    
-    private JTextArea indice = new JTextArea();
     private TextLineNumber tln;
 
 
@@ -287,13 +285,6 @@ public class Tela2 extends javax.swing.JFrame {
                     .addComponent(ContadorLC)
                     .addComponent(nomeArquivo)))
         );
-
-        indice.setFocusable(false);
-        indice.setEditable(false);
-        indice.setAutoscrolls(false);
-        indice.setFont(new java.awt.Font("Segoe UI", 0, 18));
-        indice.setBackground(Color.LIGHT_GRAY);
-        indice.setText("1");
 
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -705,7 +696,6 @@ public class Tela2 extends javax.swing.JFrame {
                 linhaCount += i+1 + "\n";
             }
         }
-        indice.setText(linhaCount);
         selectPainelEditavel = painelEditavel.getSelectedText();
         painelEditavel.requestFocus();
     }//GEN-LAST:event_painelEditavelMouseClicked
@@ -723,7 +713,6 @@ public class Tela2 extends javax.swing.JFrame {
                 linhaCount += i+1 + "\n";
             }
         }
-        indice.setText(linhaCount);
         selectPainelEditavel = painelEditavel.getSelectedText();
         painelEditavel.requestFocus();
     }//GEN-LAST:event_painelEditavelKeyReleased
@@ -741,13 +730,8 @@ public class Tela2 extends javax.swing.JFrame {
                 linhaCount += i+1 + "\n";
             }
         }
-        Point p = new Point();
-        Point pi = pointer.getMagicCaretPosition();
-        indice.setText(linhaCount);
-        
-        //p.setLocation(pointer.getMagicCaretPosition());
-        indice.setFocusable(true);
-        indice.requestFocusInWindow();  
+        selectPainelEditavel = painelEditavel.getSelectedText();
+        painelEditavel.requestFocus();
     }//GEN-LAST:event_painelEditavelMouseReleased
 
     private void painelEditavelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_painelEditavelKeyPressed
