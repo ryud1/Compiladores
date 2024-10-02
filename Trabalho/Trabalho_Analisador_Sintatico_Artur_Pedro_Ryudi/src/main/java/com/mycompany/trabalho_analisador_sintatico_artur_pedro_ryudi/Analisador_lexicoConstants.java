@@ -8,165 +8,169 @@ package com.mycompany.trabalho_analisador_sintatico_artur_pedro_ryudi;/* Generat
  */
 public interface Analisador_lexicoConstants {
 
-  /** End of File. */
-  int EOF = 0;
-  /** RegularExpression Id. */
-  int MAKE = 7;
-  /** RegularExpression Id. */
-  int END = 8;
-  /** RegularExpression Id. */
-  int CONST = 9;
-  /** RegularExpression Id. */
-  int VAR = 10;
-  /** RegularExpression Id. */
-  int GET = 11;
-  /** RegularExpression Id. */
-  int PUT = 12;
-  /** RegularExpression Id. */
-  int IF = 13;
-  /** RegularExpression Id. */
-  int ELSE = 14;
-  /** RegularExpression Id. */
-  int THEN = 15;
-  /** RegularExpression Id. */
-  int INT = 16;
-  /** RegularExpression Id. */
-  int REAL = 17;
-  /** RegularExpression Id. */
-  int CHAR = 18;
-  /** RegularExpression Id. */
-  int BOOL = 19;
-  /** RegularExpression Id. */
-  int TRUE = 20;
-  /** RegularExpression Id. */
-  int FALSE = 21;
-  /** RegularExpression Id. */
-  int WHILE = 22;
-  /** RegularExpression Id. */
-  int PONTO = 23;
-  /** RegularExpression Id. */
-  int DOIS_PONTOS = 24;
-  /** RegularExpression Id. */
-  int PONTO_E_VIRGULA = 25;
-  /** RegularExpression Id. */
-  int ATRIBUICAO = 26;
-  /** RegularExpression Id. */
-  int VIRGULA = 27;
-  /** RegularExpression Id. */
-  int ABRE_PARENTESES = 28;
-  /** RegularExpression Id. */
-  int FECHA_PARENTESES = 29;
-  /** RegularExpression Id. */
-  int MAIS = 30;
-  /** RegularExpression Id. */
-  int MENOS = 31;
-  /** RegularExpression Id. */
-  int MULTIPLICACAO = 32;
-  /** RegularExpression Id. */
-  int DIVISAO = 33;
-  /** RegularExpression Id. */
-  int EXPONENCIAL = 34;
-  /** RegularExpression Id. */
-  int DIVISAO_INTEIRA = 35;
-  /** RegularExpression Id. */
-  int RESTO_DIVISAO_INTEIRA = 36;
-  /** RegularExpression Id. */
-  int IGUAL = 37;
-  /** RegularExpression Id. */
-  int DIFERENTE = 38;
-  /** RegularExpression Id. */
-  int MENOR = 39;
-  /** RegularExpression Id. */
-  int MAIOR = 40;
-  /** RegularExpression Id. */
-  int MENOR_IGUAL = 41;
-  /** RegularExpression Id. */
-  int MAIOR_IGUAL = 42;
-  /** RegularExpression Id. */
-  int E_COMERCIAL = 43;
-  /** RegularExpression Id. */
-  int BARRA_VERTICAL = 44;
-  /** RegularExpression Id. */
-  int EXCLAMACAO = 45;
-  /** RegularExpression Id. */
-  int IDENTIFICADOR = 46;
-  /** RegularExpression Id. */
-  int CONSTANTES_INT = 47;
-  /** RegularExpression Id. */
-  int CONSTANTES_FLOAT = 48;
-  /** RegularExpression Id. */
-  int CONSTANTE_LITARAL_ASPAS = 49;
-  /** RegularExpression Id. */
-  int CONSTANTE_LITARAL_APOSTROFO = 50;
-  /** RegularExpression Id. */
-  int E_LEX_CONST_LIT = 51;
-  /** RegularExpression Id. */
-  int E_LEX_IDENTIFICADOR = 52;
-  /** RegularExpression Id. */
-  int E_LEX_NUMERO = 53;
-  /** RegularExpression Id. */
-  int ERRO_LEXICO_SIMBOLO = 54;
-
-  /** Lexical state. */
-  int DEFAULT = 0;
-
-  /** Literal token values. */
-  String[] tokenImage = {
-    "<EOF>",
-    "\" \"",
-    "\"\\t\"",
-    "\"\\n\"",
-    "\"\\r\"",
-    "<token of kind 5>",
-    "<token of kind 6>",
-    "<MAKE>",
-    "<END>",
-    "<CONST>",
-    "<VAR>",
-    "<GET>",
-    "<PUT>",
-    "<IF>",
-    "<ELSE>",
-    "<THEN>",
-    "<INT>",
-    "<REAL>",
-    "<CHAR>",
-    "<BOOL>",
-    "<TRUE>",
-    "<FALSE>",
-    "<WHILE>",
-    "\".\"",
-    "\":\"",
-    "\";\"",
-    "\"->\"",
-    "\",\"",
-    "\"(\"",
-    "\")\"",
-    "\"+\"",
-    "\"-\"",
-    "\"*\"",
-    "\"/\"",
-    "\"**\"",
-    "\"%\"",
-    "\"%%\"",
-    "\"=\"",
-    "\"<>\"",
-    "\"<\"",
-    "\">\"",
-    "\"<=\"",
-    "\">=\"",
-    "\"&\"",
-    "\"|\"",
-    "\"!\"",
-    "<IDENTIFICADOR>",
-    "<CONSTANTES_INT>",
-    "<CONSTANTES_FLOAT>",
-    "<CONSTANTE_LITARAL_ASPAS>",
-    "<CONSTANTE_LITARAL_APOSTROFO>",
-    "<E_LEX_CONST_LIT>",
-    "<E_LEX_IDENTIFICADOR>",
-    "<E_LEX_NUMERO>",
-    "<ERRO_LEXICO_SIMBOLO>",
-  };
-
-}
+    /** End of File. */
+    int EOF = 0;
+    /** RegularExpression Id. */
+    int MAKE = 7;
+    /** RegularExpression Id. */
+    int END = 8;
+    /** RegularExpression Id. */
+    int CONST = 9;
+    /** RegularExpression Id. */
+    int VAR = 10;
+    /** RegularExpression Id. */
+    int GET = 11;
+    /** RegularExpression Id. */
+    int PUT = 12;
+    /** RegularExpression Id. */
+    int IF = 13;
+    /** RegularExpression Id. */
+    int ELSE = 14;
+    /** RegularExpression Id. */
+    int THEN = 15;
+    /** RegularExpression Id. */
+    int INT = 16;
+    /** RegularExpression Id. */
+    int REAL = 17;
+    /** RegularExpression Id. */
+    int CHAR = 18;
+    /** RegularExpression Id. */
+    int BOOL = 19;
+    /** RegularExpression Id. */
+    int TRUE = 20;
+    /** RegularExpression Id. */
+    int FALSE = 21;
+    /** RegularExpression Id. */
+    int WHILE = 22;
+    /** RegularExpression Id. */
+    int PONTO = 23;
+    /** RegularExpression Id. */
+    int DOIS_PONTOS = 24;
+    /** RegularExpression Id. */
+    int PONTO_E_VIRGULA = 25;
+    /** RegularExpression Id. */
+    int ATRIBUICAO = 26;
+    /** RegularExpression Id. */
+    int VIRGULA = 27;
+    /** RegularExpression Id. */
+    int ABRE_PARENTESES = 28;
+    /** RegularExpression Id. */
+    int FECHA_PARENTESES = 29;
+    /** RegularExpression Id. */
+    int MAIS = 30;
+    /** RegularExpression Id. */
+    int MENOS = 31;
+    /** RegularExpression Id. */
+    int MULTIPLICACAO = 32;
+    /** RegularExpression Id. */
+    int DIVISAO = 33;
+    /** RegularExpression Id. */
+    int EXPONENCIAL = 34;
+    /** RegularExpression Id. */
+    int DIVISAO_INTEIRA = 35;
+    /** RegularExpression Id. */
+    int RESTO_DIVISAO_INTEIRA = 36;
+    /** RegularExpression Id. */
+    int IGUAL = 37;
+    /** RegularExpression Id. */
+    int DIFERENTE = 38;
+    /** RegularExpression Id. */
+    int MENOR = 39;
+    /** RegularExpression Id. */
+    int MAIOR = 40;
+    /** RegularExpression Id. */
+    int MENOR_IGUAL = 41;
+    /** RegularExpression Id. */
+    int MAIOR_IGUAL = 42;
+    /** RegularExpression Id. */
+    int E_COMERCIAL = 43;
+    /** RegularExpression Id. */
+    int BARRA_VERTICAL = 44;
+    /** RegularExpression Id. */
+    int EXCLAMACAO = 45;
+    /** RegularExpression Id. */
+    int IDENTIFICADOR = 46;
+    /** RegularExpression Id. */
+    int CONSTANTES_INT = 47;
+    /** RegularExpression Id. */
+    int CONSTANTES_FLOAT = 48;
+    /** RegularExpression Id. */
+    int CONSTANTE_LITARAL_ASPAS = 49;
+    /** RegularExpression Id. */
+    int CONSTANTE_LITARAL_APOSTROFO = 50;
+    /** RegularExpression Id. */
+    int E_LEX_CONST_LIT = 51;
+    /** RegularExpression Id. */
+    int E_LEX_IDENTIFICADOR = 52;
+    /** RegularExpression Id. */
+    int E_LEX_NUMERO = 53;
+    /** RegularExpression Id. */
+    int ERRO_LEXICO_SIMBOLO = 54;
+    /** RegularExpression Id. */
+    int E_LEX_COM_BLOCO = 55;
+  
+    /** Lexical state. */
+    int DEFAULT = 0;
+  
+    /** Literal token values. */
+    String[] tokenImage = {
+      "<EOF>",
+      "\" \"",
+      "\"\\t\"",
+      "\"\\n\"",
+      "\"\\r\"",
+      "<token of kind 5>",
+      "<token of kind 6>",
+      "<MAKE>",
+      "<END>",
+      "<CONST>",
+      "<VAR>",
+      "<GET>",
+      "<PUT>",
+      "<IF>",
+      "<ELSE>",
+      "<THEN>",
+      "<INT>",
+      "<REAL>",
+      "<CHAR>",
+      "<BOOL>",
+      "<TRUE>",
+      "<FALSE>",
+      "<WHILE>",
+      "\".\"",
+      "\":\"",
+      "\";\"",
+      "\"->\"",
+      "\",\"",
+      "\"(\"",
+      "\")\"",
+      "\"+\"",
+      "\"-\"",
+      "\"*\"",
+      "\"/\"",
+      "\"**\"",
+      "\"%\"",
+      "\"%%\"",
+      "\"=\"",
+      "\"<>\"",
+      "\"<\"",
+      "\">\"",
+      "\"<=\"",
+      "\">=\"",
+      "\"&\"",
+      "\"|\"",
+      "\"!\"",
+      "<IDENTIFICADOR>",
+      "<CONSTANTES_INT>",
+      "<CONSTANTES_FLOAT>",
+      "<CONSTANTE_LITARAL_ASPAS>",
+      "<CONSTANTE_LITARAL_APOSTROFO>",
+      "<E_LEX_CONST_LIT>",
+      "<E_LEX_IDENTIFICADOR>",
+      "<E_LEX_NUMERO>",
+      "<ERRO_LEXICO_SIMBOLO>",
+      "<E_LEX_COM_BLOCO>",
+    };
+  
+  }
+  

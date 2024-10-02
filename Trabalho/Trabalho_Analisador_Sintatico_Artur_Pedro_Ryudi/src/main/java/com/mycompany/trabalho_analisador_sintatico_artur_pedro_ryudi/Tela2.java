@@ -28,11 +28,7 @@ public class Tela2 extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Compilador");
-        this.setPainelEditavel("");
-    }
-    
-    public void setPainelEditavel(String text) {
-        painelEditavel.setText(text);
+        painelEditavel.setText("");
     }
 
     private String resultado;
@@ -72,8 +68,6 @@ public class Tela2 extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel2 = new javax.swing.JPanel();
-        lineCounterPainelEditavel = new javax.swing.JTextPane();
         painelEditavel = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         terminal = new javax.swing.JTextArea();
@@ -110,20 +104,8 @@ public class Tela2 extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setAlignmentX(0.0F);
 
-        jScrollPane1.setRowHeader(null);
-        jScrollPane1.setRowHeaderView(lineCounterPainelEditavel);
-
-        lineCounterPainelEditavel.setEditable(false);
-        lineCounterPainelEditavel.setBackground(new java.awt.Color(225, 225, 225));
-        lineCounterPainelEditavel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lineCounterPainelEditavel.setAutoscrolls(false);
-        lineCounterPainelEditavel.setFocusCycleRoot(false);
-        lineCounterPainelEditavel.setFocusable(false);
-        lineCounterPainelEditavel.setRequestFocusEnabled(false);
-        lineCounterPainelEditavel.setVerifyInputWhenFocusTarget(false);
-
         painelEditavel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        painelEditavel.setAutoscrolls(false);
+        painelEditavel.setMinimumSize(new java.awt.Dimension(13, 20));
         painelEditavel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 painelEditavelMouseClicked(evt);
@@ -140,31 +122,20 @@ public class Tela2 extends javax.swing.JFrame {
                 painelEditavelKeyReleased(evt);
             }
         });
+        jScrollPane1.setViewportView(painelEditavel);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lineCounterPainelEditavel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(painelEditavel, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
-                .addGap(1, 1, 1))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lineCounterPainelEditavel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-            .addComponent(painelEditavel)
-        );
+        jScrollPane3.setToolTipText("");
+        jScrollPane3.setColumnHeaderView(null);
+        jScrollPane3.setPreferredSize(new java.awt.Dimension(60, 30));
 
-        lineCounterPainelEditavel.getAccessibleContext().setAccessibleName("");
-
-        jScrollPane1.setViewportView(jPanel2);
-
-        terminal.setEditable(false);
-        terminal.setColumns(20);
+        terminal.setColumns(1);
         terminal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         terminal.setRows(1);
+        terminal.setTabSize(1);
+        terminal.setToolTipText("");
+        terminal.setMinimumSize(new java.awt.Dimension(13, 20));
+        terminal.setName(""); // NOI18N
+        terminal.setVerifyInputWhenFocusTarget(false);
         jScrollPane3.setViewportView(terminal);
 
         ContadorLC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -206,13 +177,15 @@ public class Tela2 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ContadorLC, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(nomeArquivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(ContadorLC, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,8 +201,7 @@ public class Tela2 extends javax.swing.JFrame {
                         .addComponent(botaoExecutar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -246,14 +218,20 @@ public class Tela2 extends javax.swing.JFrame {
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ContadorLC)
                     .addComponent(nomeArquivo)))
         );
+
+        JTextArea indice = new JTextArea();
+        indice.setFont(new java.awt.Font("Segoe UI", 0, 18));
+        indice.setBackground(Color.LIGHT_GRAY);
+        indice.setText("1");
+        jScrollPane1.setRowHeaderView(indice);
 
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -667,18 +645,24 @@ public class Tela2 extends javax.swing.JFrame {
     private void painelEditavelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_painelEditavelKeyReleased
         Caret pointer = painelEditavel.getCaret();
         String linhaCount = "";
+        JTextArea indice = new JTextArea();
+        indice.setBackground(Color.LIGHT_GRAY);
+        indice.setFont(new java.awt.Font("Segoe UI", 0, 18));
+
         if (pointer.getMagicCaretPosition() != null) {
             String contador = "Linha: "
                     + (((pointer.getMagicCaretPosition().y) / 25) + 1)
                     + " | Coluna: "
                     + (((pointer.getMagicCaretPosition().x) / 9) + 1);
             ContadorLC.setText(contador);
-            for(int i = 0;i<(((pointer.getMagicCaretPosition().y) / 25) + 1);i++){
+            for(int i = 0;i<painelEditavel.getLineCount();i++){
                 linhaCount += i+1 + "\n";
             }
         }
-        lineCounterPainelEditavel.setText(linhaCount);
+        indice.setText(linhaCount);
+        jScrollPane1.setRowHeaderView(indice);
         selectPainelEditavel = painelEditavel.getSelectedText();
+        painelEditavel.requestFocus();
     }//GEN-LAST:event_painelEditavelKeyReleased
 
     private void painelEditavelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelEditavelMouseReleased
@@ -755,10 +739,8 @@ public class Tela2 extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextPane lineCounterPainelEditavel;
     private javax.swing.JMenu listaArquivo;
     private javax.swing.JMenu listaCompilacao;
     private javax.swing.JMenu listaEdição;
