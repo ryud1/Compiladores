@@ -73,17 +73,16 @@ public class Tela2 extends javax.swing.JFrame {
         terminal = new javax.swing.JTextArea();
         ContadorLC = new javax.swing.JLabel();
         nomeArquivo = new javax.swing.JLabel();
-        Icon icon = new ImageIcon("./src/main/java/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/gerramenta 32bit.png");
-        botaoCompilar = new JButton(icon);
+        botaoCompilar = new javax.swing.JButton();
         Icon icon2 = new ImageIcon("./src/main/java/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/PLAY.png");
         botaoExecutar = new JButton(icon2);
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        botaoIconSalvar = new javax.swing.JButton();
+        botaoIconCortar = new javax.swing.JButton();
+        botaoIconCopiar = new javax.swing.JButton();
+        botaoIconColar = new javax.swing.JButton();
+        botaoIconBoia = new javax.swing.JButton();
+        botaoIconNovo = new javax.swing.JButton();
+        botaoIconAbrir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         listaArquivo = new javax.swing.JMenu();
         botaoNovo = new javax.swing.JMenuItem();
@@ -146,7 +145,7 @@ public class Tela2 extends javax.swing.JFrame {
         nomeArquivo.setText("Nome do arquivo");
         nomeArquivo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
-        botaoCompilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/gerramenta 32bit.png"))); // NOI18N
+        botaoCompilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/gerramenta 32bit.png"))); // NOI18N
         botaoCompilar.setAlignmentY(0.0F);
         botaoCompilar.setMargin(new java.awt.Insets(2, 0, 3, 0));
         botaoCompilar.setMaximumSize(new java.awt.Dimension(32, 32));
@@ -158,7 +157,7 @@ public class Tela2 extends javax.swing.JFrame {
             }
         });
 
-        botaoExecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/PLAY.png"))); // NOI18N
+        botaoExecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/PLAY.png"))); // NOI18N
         botaoExecutar.setAlignmentY(0.0F);
         botaoExecutar.setMargin(new java.awt.Insets(2, 0, 3, 0));
         botaoExecutar.setMaximumSize(new java.awt.Dimension(32, 32));
@@ -167,6 +166,56 @@ public class Tela2 extends javax.swing.JFrame {
         botaoExecutar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoExecutarActionPerformed(evt);
+            }
+        });
+
+        botaoIconSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Save(1).png"))); // NOI18N
+        botaoIconSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoIconSalvarActionPerformed(evt);
+            }
+        });
+
+        botaoIconCortar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Cut (1).png"))); // NOI18N
+        botaoIconCortar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoIconCortarActionPerformed(evt);
+            }
+        });
+
+        botaoIconCopiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Copy (1).png"))); // NOI18N
+        botaoIconCopiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoIconCopiarActionPerformed(evt);
+            }
+        });
+
+        botaoIconColar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Paste (1).png"))); // NOI18N
+        botaoIconColar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoIconColarActionPerformed(evt);
+            }
+        });
+
+        botaoIconBoia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Boia (1).png"))); // NOI18N
+        botaoIconBoia.setPreferredSize(new java.awt.Dimension(32, 32));
+        botaoIconBoia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoIconBoiaActionPerformed(evt);
+            }
+        });
+
+        botaoIconNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/New (1).png"))); // NOI18N
+        botaoIconNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoIconNovoActionPerformed(evt);
+            }
+        });
+
+        botaoIconAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Open(1).png"))); // NOI18N
+        botaoIconAbrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoIconAbrirActionPerformed(evt);
             }
         });
 
@@ -184,23 +233,23 @@ public class Tela2 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoIconNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoIconAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoIconSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoIconCortar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoIconCopiar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoIconColar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoCompilar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoCompilar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(botaoExecutar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoExecutar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoIconBoia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -208,15 +257,15 @@ public class Tela2 extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botaoExecutar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botaoCompilar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(botaoIconBoia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoIconColar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoExecutar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoCompilar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoIconCortar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoIconSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoIconAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoIconNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoIconCopiar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -681,6 +730,158 @@ public class Tela2 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_painelEditavelKeyPressed
 
+    private void botaoIconNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIconNovoActionPerformed
+        if (painelEditavel.getText().equals("")) {
+            painelEditavel.setText("");
+            terminal.setText("");
+        } else {
+            this.setPainelTextSaved(painelEditavel.getText());
+            Tela_Salvar telaSalvar = new Tela_Salvar(this, true, this.getPainelTextSaved());
+            int salvar = telaSalvar.getSalvar();
+            File file = telaSalvar.getFile();
+            this.setFile(file);
+            String texto = this.getPainelTextSaved();
+            telaSalvar.setPainelTextSaved(texto);
+            if (salvar == 0) {
+                this.painelTextSaved = painelEditavel.getText();
+                painelEditavel.setText("");
+                terminal.setText("");
+                this.setFile(null);
+            }
+            if (salvar == 1) {
+                nomeArquivo.setText("Nome Arquivo");
+                painelEditavel.setText("");
+                terminal.setText("");
+                this.setFile(null);
+            }
+        }
+    }//GEN-LAST:event_botaoIconNovoActionPerformed
+
+    private void botaoIconAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIconAbrirActionPerformed
+        if (painelEditavel.getText().equals("")) {
+            JFileChooser fc = new JFileChooser();
+            fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Texto (.txt)", "txt");
+            int res = fc.showOpenDialog(this);
+            if (res == JFileChooser.APPROVE_OPTION) {
+                File arquivo = fc.getSelectedFile();
+                String fileName = arquivo.getName();
+                String conteudo = "";
+                try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        conteudo += line + "\n";
+                    }
+                    this.painelEditavel.setText(conteudo);
+                    this.nomeArquivo.setText(fileName);
+                } catch (IOException ioException) {
+                    JOptionPane.showMessageDialog(this, "Erro ao abrir o arquivo: " + ioException.getMessage());
+                }
+                this.setFile(arquivo);
+            }
+        } else {
+            this.setPainelTextSaved(painelEditavel.getText());
+            Tela_Salvar telaSalvar = new Tela_Salvar(this, true, this.getPainelTextSaved());
+            int salvar = telaSalvar.getSalvar();
+            File file = telaSalvar.getFile();
+            this.setFile(file);
+            String texto = this.getPainelTextSaved();
+            telaSalvar.setPainelTextSaved(texto);
+            if (salvar == 0) {
+                this.painelTextSaved = painelEditavel.getText();
+                painelEditavel.setText("");
+                terminal.setText("");
+                this.setFile(null);
+            }
+            if (salvar == 1) {
+                nomeArquivo.setText("Nome Arquivo");
+                painelEditavel.setText("");
+                terminal.setText("");
+                this.setFile(null);
+                JFileChooser fc = new JFileChooser();
+                fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Texto (.txt)", "txt");
+                int res = fc.showOpenDialog(this);
+                if (res == JFileChooser.APPROVE_OPTION) {
+                    File arquivo = fc.getSelectedFile();
+                    String fileName = arquivo.getName();
+                    String conteudo = "";
+                    try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            conteudo += line + "\n";
+                        }
+                        this.painelEditavel.setText(conteudo);
+                        this.nomeArquivo.setText(fileName);
+                    } catch (IOException ioException) {
+                        JOptionPane.showMessageDialog(this, "Erro ao abrir o arquivo: " + ioException.getMessage());
+                    }
+                    this.setFile(arquivo);
+                }
+            }
+        }
+    }//GEN-LAST:event_botaoIconAbrirActionPerformed
+
+    private void botaoIconSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIconSalvarActionPerformed
+        File file = this.getFile();
+        if (file != null) {
+            if (!file.getName().toLowerCase().endsWith(".txt")) {
+                JOptionPane.showMessageDialog(this, "Por favor, salve o arquivo com a extensão .txt");
+                return;
+            }
+
+            try (FileWriter writer = new FileWriter(file)) {
+                String texto = this.painelEditavel.getText();
+                writer.write(texto);
+                JOptionPane.showMessageDialog(this, "Arquivo salvo com sucesso!");
+            } catch (IOException ioException) {
+                JOptionPane.showMessageDialog(this, "Erro ao salvar o arquivo: " + ioException.getMessage());
+            }
+        } else {
+            JFileChooser fc = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Texto (.txt)", "txt");
+            fc.setFileFilter(filter);
+            fc.setAcceptAllFileFilterUsed(false);
+
+            int res = fc.showSaveDialog(this);
+            if (res == JFileChooser.APPROVE_OPTION) {
+                File arquivo = fc.getSelectedFile();
+                String filepath = arquivo.getPath();
+
+                if (!filepath.toLowerCase().endsWith(".txt")) {
+                    arquivo = new File(filepath + ".txt");
+                }
+
+                this.setFile(arquivo);
+
+                try (FileWriter writer = new FileWriter(arquivo)) {
+                    String texto = painelEditavel.getText();
+                    writer.write(texto);
+                    JOptionPane.showMessageDialog(this, "Arquivo salvo com sucesso!");
+                } catch (IOException ioException) {
+                    JOptionPane.showMessageDialog(this, "Erro ao salvar o arquivo: " + ioException.getMessage());
+                }
+            }
+        }
+    }//GEN-LAST:event_botaoIconSalvarActionPerformed
+
+    private void botaoIconCortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIconCortarActionPerformed
+        bufferPainelEditavel = selectPainelEditavel;
+        painelEditavel.replaceSelection("");
+    }//GEN-LAST:event_botaoIconCortarActionPerformed
+
+    private void botaoIconCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIconCopiarActionPerformed
+        bufferPainelEditavel = selectPainelEditavel;
+    }//GEN-LAST:event_botaoIconCopiarActionPerformed
+
+    private void botaoIconColarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIconColarActionPerformed
+        painelEditavel.insert(bufferPainelEditavel, painelEditavel.getCaretPosition());
+    }//GEN-LAST:event_botaoIconColarActionPerformed
+
+    private void botaoIconBoiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIconBoiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoIconBoiaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -723,6 +924,13 @@ public class Tela2 extends javax.swing.JFrame {
     private javax.swing.JButton botaoCompilar;
     private javax.swing.JMenuItem botaoCopiar;
     private javax.swing.JButton botaoExecutar;
+    private javax.swing.JButton botaoIconAbrir;
+    private javax.swing.JButton botaoIconBoia;
+    private javax.swing.JButton botaoIconColar;
+    private javax.swing.JButton botaoIconCopiar;
+    private javax.swing.JButton botaoIconCortar;
+    private javax.swing.JButton botaoIconNovo;
+    private javax.swing.JButton botaoIconSalvar;
     private javax.swing.JMenuItem botaoMenuCompilar;
     private javax.swing.JMenuItem botaoMenuExecutar;
     private javax.swing.JMenuItem botaoNovo;
@@ -730,13 +938,6 @@ public class Tela2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem botaoSair;
     private javax.swing.JMenuItem botaoSalvar;
     private javax.swing.JMenuItem botaoSalvarComo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
