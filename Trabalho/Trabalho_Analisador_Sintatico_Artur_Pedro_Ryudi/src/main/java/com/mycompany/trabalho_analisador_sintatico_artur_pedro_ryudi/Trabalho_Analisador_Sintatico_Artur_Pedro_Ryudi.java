@@ -1,8 +1,7 @@
+package com.mycompany.trabalho_analisador_sintatico_artur_pedro_ryudi;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-package com.mycompany.trabalho_analisador_sintatico_artur_pedro_ryudi;
-import javax.swing.JFrame;
 /**
  *
  * @author Bebeto
