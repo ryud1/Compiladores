@@ -99,179 +99,141 @@ public class Analisador_lexico implements Analisador_lexicoConstants {
             switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
                 case MAKE:
                 jj_consume_token(MAKE);
-                texto += "Palavra reservada: MAKE\n";
                 break;
                 case END:
                     jj_consume_token(END);
-                    texto += "Palavra reservada: END\n";
                     break;
                 case CONST:
                     jj_consume_token(CONST);
-                    texto += "Palavra reservada: CONST\n";
                     break;
                 case VAR:
                     jj_consume_token(VAR);
-                    texto += "Palavra reservada: VAR\n";
                     break;
                 case GET:
                     jj_consume_token(GET);
-                    texto += "Palavra reservada: GET\n";
                     break;
                 case PUT:
                     jj_consume_token(PUT);
-                    texto += "Palavra reservada: PUT\n";
                     break;
                 case IF:
                     jj_consume_token(IF);
-                    texto += "Palavra reservada: IF\n";
                     break;
                 case ELSE:
                     jj_consume_token(ELSE);
-                    texto += "Palavra reservada: ELSE\n";
                     break;
                 case THEN:
                     jj_consume_token(THEN);
-                    texto += "Palavra reservada: THEN\n";
                     break;
                 case INT:
                     jj_consume_token(INT);
-                    texto += "Palavra reservada: INT\n";
                     break;
                 case REAL:
                     jj_consume_token(REAL);
-                    texto += "Palavra reservada: REAL\n";
                     break;
                 case CHAR:
                     jj_consume_token(CHAR);
-                    texto += "Palavra reservada: CHAR\n";
                     break;
                 case BOOL:
                     jj_consume_token(BOOL);
-                    texto += "Palavra reservada: BOOL\n";
                     break;
                 case TRUE:
                     jj_consume_token(TRUE);
-                    texto += "Palavra reservada: TRUE\n";
                     break;
                 case FALSE:
                     jj_consume_token(FALSE);
-                    texto += "Palavra reservada: FALSE\n";
                     break;
                 case WHILE:
                     jj_consume_token(WHILE);
-                    texto += "Palavra reservada: WHILE\n";
                     break;
                 case PONTO:
                     jj_consume_token(PONTO);
-                    texto += "Simbolo: PONTO\n";
                     break;
                 case DOIS_PONTOS:
                     jj_consume_token(DOIS_PONTOS);
-                    texto += "Simbolo: DOIS PONTOS\n";
                     break;
                 case PONTO_E_VIRGULA:
                     jj_consume_token(PONTO_E_VIRGULA);
-                    texto += "Simbolo: PONTO E VIRGULA\n";
                     break;
                 case ATRIBUICAO:
                     jj_consume_token(ATRIBUICAO);
-                    texto += "Simbolo: ATRIBUICAO\n";
                     break;
                 case VIRGULA:
                     jj_consume_token(VIRGULA);
-                    texto += "Simbolo: VIRGULA\n";
                     break;
                 case ABRE_PARENTESES:
                     jj_consume_token(ABRE_PARENTESES);
-                    texto += "Simbolo: ABRE PARENTESES\n";
                     break;
                 case FECHA_PARENTESES:
                     jj_consume_token(FECHA_PARENTESES);
-                    texto += "Simbolo: FECHA PARENTESES\n";
                     break;
                 case MAIS:
                     jj_consume_token(MAIS);
-                    texto += "Simbolo: MAIS\n";
                     break;
                 case MENOS:
                     jj_consume_token(MENOS);
-                    texto += "Simbolo: MENOS\n";
                     break;
                 case MULTIPLICACAO:
                     jj_consume_token(MULTIPLICACAO);
-                    texto += "Simbolo: MULTIPLICACAO\n";
                     break;
                 case DIVISAO:
                     jj_consume_token(DIVISAO);
-                    texto += "Simbolo: DIVISAO\n";
                     break;
                 case EXPONENCIAL:
                     jj_consume_token(EXPONENCIAL);
-                    texto += "Simbolo: EXPONENCIAL\n";
                     break;
                 case DIVISAO_INTEIRA:
                     jj_consume_token(DIVISAO_INTEIRA);
-                    texto += "Simbolo: DIVISAO INTEIRA\n";
                     break;
                 case RESTO_DIVISAO_INTEIRA:
                     jj_consume_token(RESTO_DIVISAO_INTEIRA);
-                    texto += "Simbolo: RESTO DIVISAO INTEIRA\n";
                     break;
                 case IGUAL:
                     jj_consume_token(IGUAL);
-                    texto += "Simbolo: IGUAL\n";
                     break;
                 case DIFERENTE:
                     jj_consume_token(DIFERENTE);
-                    texto += "Simbolo: DIFERENTE\n";
                     break;
                 case MENOR:
                     jj_consume_token(MENOR);
-                    texto += "Simbolo: MENOR\n";
                     break;
                 case MAIOR:
                     jj_consume_token(MAIOR);
-                    texto += "Simbolo: MAIOR\n";
                     break;
                 case MENOR_IGUAL:
                     jj_consume_token(MENOR_IGUAL);
-                    texto += "Simbolo: MENOR IGUAL\n";
                     break;
                 case MAIOR_IGUAL:
                     jj_consume_token(MAIOR_IGUAL);
-                    texto += "Simbolo: MAIOR IGUAL\n";
                     break;
                 case E_COMERCIAL:
                     jj_consume_token(E_COMERCIAL);
-                    texto += "Simbolo: E COMERCIAL\n";
                     break;
                 case BARRA_VERTICAL:
                     jj_consume_token(BARRA_VERTICAL);
-                    texto += "Simbolo: BARRA VERTICAL\n";
                     break;                
                 case EXCLAMACAO:
                     jj_consume_token(EXCLAMACAO);
-                    texto += "Simbolo: EXCLAMACAO\n";
+                    
                     break;
                 case IDENTIFICADOR:
                     n = jj_consume_token(IDENTIFICADOR);
-                    texto += "Identificador: " + n.image+ "\n";
+                    
                     break;
                 case CONSTANTES_INT:
                     n = jj_consume_token(CONSTANTES_INT);
-                    texto += "Numero int: " + n.image + "\n";
+                    
                     break;
                 case CONSTANTES_FLOAT:
                     n = jj_consume_token(CONSTANTES_FLOAT);
-                    texto += "Numero float: " + n.image+ "\n";
+
                     break;
                 case CONSTANTE_LITARAL_ASPAS:
                     jj_consume_token(CONSTANTE_LITARAL_ASPAS);
-                    texto += "Simbolo: CONST LIT ASPAS\n";
+                    
                     break;
                 case CONSTANTE_LITARAL_APOSTROFO:
                     jj_consume_token(CONSTANTE_LITARAL_APOSTROFO);
-                    texto += "Simbolo: CONST LIT APOSTROFO\n";
+                    
                     break;               
                 case E_LEX_IDENTIFICADOR:
                     n = jj_consume_token(E_LEX_IDENTIFICADOR);

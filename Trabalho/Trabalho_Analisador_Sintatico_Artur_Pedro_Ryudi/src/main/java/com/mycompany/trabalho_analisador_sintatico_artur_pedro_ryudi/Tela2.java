@@ -43,7 +43,8 @@ public class Tela2 extends javax.swing.JFrame {
     private String selectPainelEditavel;
     private String bufferPainelEditavel;
     
-    private Analisador_lexico analizador;
+    private Analisador_lexico analisadorLexico;
+    private Analisador_sintatico analisadorSintatico;
     private TextLineNumber tln;
 
 
@@ -438,33 +439,43 @@ public class Tela2 extends javax.swing.JFrame {
 
     private void botaoCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCompilarActionPerformed
         StringReader reader = new StringReader(painelEditavel.getText());
-        if (this.analizador == null) {
-            this.analizador = new Analisador_lexico(reader);
+        if (this.analisadorLexico == null) {
+            this.analisadorLexico = new Analisador_lexico(reader);
         } else {
-            analizador.ReInit(reader);
+            analisadorLexico.ReInit(reader);
         }
         try {
-            resultado = analizador.Analisador_lexico();
+            resultado = analisadorLexico.Analisador_lexico();
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
         terminal.setText(resultado);
-        int qtdErros = analizador.getSizeLinhasErro();
+        int qtdErros = analisadorLexico.getSizeLinhasErro();
         if (qtdErros > 0) {
             if (qtdErros == 1) {
-                terminal.append("\nNão foi compilado pois ocorreu um erro.\n");
+                terminal.append("Não foi compilado pois ocorreu um erro lexico.\n");
             } else {
-                terminal.append("\nNão foi compilado pois ocorreram " + analizador.getSizeLinhasErro() + " erros.\n");
+                terminal.append("Não foi compilado pois ocorreram " + analisadorLexico.getSizeLinhasErro() + " erros lexicos.\n");
             }
-            for (int i = 0; i < analizador.getSizeLinhasErro(); i++) {
-                terminal.append("Erro lexico na linha: " + analizador.getLinhasErro(i) + " | coluna: " + analizador.getColunasErro(i) + " - " + analizador.getTokensErro(i) + "\n");
+            for (int i = 0; i < analisadorLexico.getSizeLinhasErro(); i++) {
+                terminal.append("Erro lexico na linha: " + analisadorLexico.getLinhasErro(i) + " | coluna: " + analisadorLexico.getColunasErro(i) + " - " + analisadorLexico.getTokensErro(i) + "\n");
             }
         } else if (painelEditavel.getText().equals("")) {
             terminal.append("Nada a compilar.");
         } else {
+            if (this.analisadorSintatico == null) {
+                this.analisadorSintatico = new Analisador_sintatico(reader);
+            } else {
+                analisadorSintatico.ReInit(reader);
+            }
+            try {
+                analisadorSintatico.Analisador_sintatico();
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
             terminal.append("\nCompilado com sucesso!");
         }
-        analizador.limpaArrays();
+        analisadorLexico.limpaArrays();
     }//GEN-LAST:event_botaoCompilarActionPerformed
 
     private void botaoExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExecutarActionPerformed
@@ -650,33 +661,33 @@ public class Tela2 extends javax.swing.JFrame {
     
     private void botaoMenuCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuCompilarActionPerformed
         StringReader reader = new StringReader(painelEditavel.getText());
-        if (this.analizador == null) {
-            this.analizador = new Analisador_lexico(reader);
+        if (this.analisadorLexico == null) {
+            this.analisadorLexico = new Analisador_lexico(reader);
         } else {
-            analizador.ReInit(reader);
+            analisadorLexico.ReInit(reader);
         }
         try {
-            resultado = analizador.Analisador_lexico();
+            resultado = analisadorLexico.Analisador_lexico();
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
         terminal.setText(resultado);
-        int qtdErros = analizador.getSizeLinhasErro();
+        int qtdErros = analisadorLexico.getSizeLinhasErro();
         if (qtdErros > 0) {
             if (qtdErros == 1) {
                 terminal.append("\nOcorreu um erro.\n");
             } else {
-                terminal.append("\nOcorreram " + analizador.getSizeLinhasErro() + " erros.\n");
+                terminal.append("\nOcorreram " + analisadorLexico.getSizeLinhasErro() + " erros.\n");
             }
-            for (int i = 0; i < analizador.getSizeLinhasErro(); i++) {
-                terminal.append("Erro lexico na linha: " + analizador.getLinhasErro(i) + " | coluna: " + analizador.getColunasErro(i) + " - " + analizador.getTokensErro(i) + "\n");
+            for (int i = 0; i < analisadorLexico.getSizeLinhasErro(); i++) {
+                terminal.append("Erro lexico na linha: " + analisadorLexico.getLinhasErro(i) + " | coluna: " + analisadorLexico.getColunasErro(i) + " - " + analisadorLexico.getTokensErro(i) + "\n");
             }
         } else if (painelEditavel.getText().equals("")) {
             terminal.append("Nada a compilar.");
         } else {
             terminal.append("\nCompilado com sucesso!");
         }
-        analizador.limpaArrays();
+        analisadorLexico.limpaArrays();
     }//GEN-LAST:event_botaoMenuCompilarActionPerformed
 
     private void botaoMenuExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuExecutarActionPerformed
