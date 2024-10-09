@@ -468,10 +468,9 @@ public class Tela2 extends javax.swing.JFrame {
             } else {
                 analisadorSintatico.ReInit(reader);
             }
-            try {
-                analisadorSintatico.Analisador_sintatico();
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
+            analisadorSintatico.Analisador_sintatico();
+            for(String str :analisadorSintatico.getListaErros()){
+                terminal.append(str);
             }
             terminal.append("\nCompilado com sucesso!");
         }

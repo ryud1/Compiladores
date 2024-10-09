@@ -134,6 +134,7 @@ public class ParseException extends Exception {
       retval += "Was expecting one of:" + eol + "    ";
     }
     retval += expected.toString();
+    retval += "\n---\n";
     return retval;
   }
 
