@@ -119,7 +119,7 @@ public class Tela2 extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setAlignmentX(0.0F);
 
-        painelEditavel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        painelEditavel.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         painelEditavel.setAutoscrolls(false);
         painelEditavel.setMinimumSize(new java.awt.Dimension(13, 20));
         painelEditavel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -723,7 +723,7 @@ public class Tela2 extends javax.swing.JFrame {
             String contador = "Linha: "
                     + (((pointer.getMagicCaretPosition().y) / 25) + 1)
                     + " | Coluna: "
-                    + (((pointer.getMagicCaretPosition().x) / 9) + 1);
+                    + (((pointer.getMagicCaretPosition().x) / 11) + 1);
             ContadorLC.setText(contador);
             for(int i = 0;i<painelEditavel.getLineCount();i++){
                 linhaCount += i+1 + "\n";
@@ -740,7 +740,7 @@ public class Tela2 extends javax.swing.JFrame {
             String contador = "Linha: "
                     + (((pointer.getMagicCaretPosition().y) / 25) + 1)
                     + " | Coluna: "
-                    + (((pointer.getMagicCaretPosition().x) / 9) + 1);
+                    + (((pointer.getMagicCaretPosition().x) / 11) + 1);
             ContadorLC.setText(contador);
             for(int i = 0;i<painelEditavel.getLineCount();i++){
                 linhaCount += i+1 + "\n";
@@ -757,7 +757,7 @@ public class Tela2 extends javax.swing.JFrame {
             String contador = "Linha: "
                     + (((pointer.getMagicCaretPosition().y) / 25) + 1)
                     + " | Coluna: "
-                    + (((pointer.getMagicCaretPosition().x) / 9) + 1);
+                    + (((pointer.getMagicCaretPosition().x) / 11) + 1);
             ContadorLC.setText(contador);
             for(int i = 0;i<painelEditavel.getLineCount();i++){
                 linhaCount += i+1 + "\n";
