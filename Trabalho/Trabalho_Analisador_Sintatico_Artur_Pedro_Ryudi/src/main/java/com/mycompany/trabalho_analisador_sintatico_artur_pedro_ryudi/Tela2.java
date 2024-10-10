@@ -164,6 +164,7 @@ public class Tela2 extends javax.swing.JFrame {
         nomeArquivo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         botaoCompilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/gerramenta_32bit.png"))); // NOI18N
+        botaoCompilar.setToolTipText("Compilar");
         botaoCompilar.setAlignmentY(0.0F);
         botaoCompilar.setMargin(new java.awt.Insets(2, 0, 3, 0));
         botaoCompilar.setMaximumSize(new java.awt.Dimension(32, 32));
@@ -176,6 +177,7 @@ public class Tela2 extends javax.swing.JFrame {
         });
 
         botaoExecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Play.png"))); // NOI18N
+        botaoExecutar.setToolTipText("Executar");
         botaoExecutar.setAlignmentY(0.0F);
         botaoExecutar.setMargin(new java.awt.Insets(2, 0, 3, 0));
         botaoExecutar.setMaximumSize(new java.awt.Dimension(32, 32));
@@ -188,6 +190,7 @@ public class Tela2 extends javax.swing.JFrame {
         });
 
         botaoIconSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Save_(1).png"))); // NOI18N
+        botaoIconSalvar.setToolTipText("Salvar arquivo");
         botaoIconSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoIconSalvarActionPerformed(evt);
@@ -195,6 +198,7 @@ public class Tela2 extends javax.swing.JFrame {
         });
 
         botaoIconCortar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Cut_(1).png"))); // NOI18N
+        botaoIconCortar.setToolTipText("Recortar");
         botaoIconCortar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoIconCortarActionPerformed(evt);
@@ -202,6 +206,7 @@ public class Tela2 extends javax.swing.JFrame {
         });
 
         botaoIconCopiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Copy_(1).png"))); // NOI18N
+        botaoIconCopiar.setToolTipText("Copiar");
         botaoIconCopiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoIconCopiarActionPerformed(evt);
@@ -209,6 +214,7 @@ public class Tela2 extends javax.swing.JFrame {
         });
 
         botaoIconColar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Paste_(1).png"))); // NOI18N
+        botaoIconColar.setToolTipText("Colar");
         botaoIconColar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoIconColarActionPerformed(evt);
@@ -216,6 +222,7 @@ public class Tela2 extends javax.swing.JFrame {
         });
 
         botaoIconBoia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Boia_(1).png"))); // NOI18N
+        botaoIconBoia.setToolTipText("Boia");
         botaoIconBoia.setPreferredSize(new java.awt.Dimension(32, 32));
         botaoIconBoia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,6 +231,7 @@ public class Tela2 extends javax.swing.JFrame {
         });
 
         botaoIconNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/New_(1).png"))); // NOI18N
+        botaoIconNovo.setToolTipText("Novo arquivo");
         botaoIconNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoIconNovoActionPerformed(evt);
@@ -231,6 +239,7 @@ public class Tela2 extends javax.swing.JFrame {
         });
 
         botaoIconAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Open_(1).png"))); // NOI18N
+        botaoIconAbrir.setToolTipText("Abrir arquivo");
         botaoIconAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoIconAbrirActionPerformed(evt);
@@ -256,17 +265,17 @@ public class Tela2 extends javax.swing.JFrame {
                         .addComponent(botaoIconAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(botaoIconSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(botaoIconCortar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(botaoIconCopiar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(botaoIconColar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(botaoCompilar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(botaoExecutar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(botaoIconBoia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -460,9 +469,9 @@ public class Tela2 extends javax.swing.JFrame {
         int qtdErros = analisadorLexico.getSizeLinhasErro();
         if (qtdErros > 0) {
             if (qtdErros == 1) {
-                terminal.append("Não foi compilado pois ocorreu um erro lexico.\n");
+                terminal.append("Não foi executado pois ocorreu um erro lexico.\n");
             } else {
-                terminal.append("Não foi compilado pois ocorreram " + analisadorLexico.getSizeLinhasErro() + " erros lexicos.\n");
+                terminal.append("Não foi executado pois ocorreram " + analisadorLexico.getSizeLinhasErro() + " erros lexicos.\n");
             }
             for (int i = 0; i < analisadorLexico.getSizeLinhasErro(); i++) {
                 terminal.append("Erro lexico na linha: " + analisadorLexico.getLinhasErro(i) + " | coluna: " + analisadorLexico.getColunasErro(i) + " - " + analisadorLexico.getTokensErro(i) + "\n");
@@ -478,14 +487,14 @@ public class Tela2 extends javax.swing.JFrame {
             }
             analisadorSintatico.Analisador_sintatico();
             if(analisadorSintatico.getSizeListaErros() == 1){
-                terminal.append("Não foi compilado pois ocorreu um erro sintático:\n\n");
+                terminal.append("Não foi executado pois ocorreu um erro sintático:\n\n");
                 for(String str :analisadorSintatico.getListaErros()){
                     terminal.append(str);
                 }
             }
             else
             if(analisadorSintatico.getSizeListaErros() > 1){
-                terminal.append("Não foi compilado pois ocorreram " + analisadorSintatico.getSizeListaErros() + " erros sintáticos:\n\n");
+                terminal.append("Não foi executado pois ocorreram " + analisadorSintatico.getSizeListaErros() + " erros sintáticos:\n\n");
                 for(String str :analisadorSintatico.getListaErros()){
                     terminal.append(str);
                 }
@@ -693,13 +702,13 @@ public class Tela2 extends javax.swing.JFrame {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        terminal.setText(resultado);
+        terminal.setText("");
         int qtdErros = analisadorLexico.getSizeLinhasErro();
         if (qtdErros > 0) {
             if (qtdErros == 1) {
-                terminal.append("\nOcorreu um erro.\n");
+                terminal.append("Não foi executado pois ocorreu um erro lexico.\n");
             } else {
-                terminal.append("\nOcorreram " + analisadorLexico.getSizeLinhasErro() + " erros.\n");
+                terminal.append("Não foi executado pois ocorreram " + analisadorLexico.getSizeLinhasErro() + " erros lexicos.\n");
             }
             for (int i = 0; i < analisadorLexico.getSizeLinhasErro(); i++) {
                 terminal.append("Erro lexico na linha: " + analisadorLexico.getLinhasErro(i) + " | coluna: " + analisadorLexico.getColunasErro(i) + " - " + analisadorLexico.getTokensErro(i) + "\n");
@@ -707,9 +716,31 @@ public class Tela2 extends javax.swing.JFrame {
         } else if (painelEditavel.getText().equals("")) {
             terminal.append("Nada a compilar.");
         } else {
-            terminal.append("\nCompilado com sucesso!");
+            StringReader reader2 = new StringReader(painelEditavel.getText());
+            if (this.analisadorSintatico == null) {
+                this.analisadorSintatico = new Analisador_sintatico(reader2);
+            } else {
+                analisadorSintatico.ReInit(reader2);
+            }
+            analisadorSintatico.Analisador_sintatico();
+            if(analisadorSintatico.getSizeListaErros() == 1){
+                terminal.append("Não foi executado pois ocorreu um erro sintático:\n\n");
+                for(String str :analisadorSintatico.getListaErros()){
+                    terminal.append(str);
+                }
+            }
+            else
+            if(analisadorSintatico.getSizeListaErros() > 1){
+                terminal.append("Não foi executado pois ocorreram " + analisadorSintatico.getSizeListaErros() + " erros sintáticos:\n\n");
+                for(String str :analisadorSintatico.getListaErros()){
+                    terminal.append(str);
+                }
+            }
+            else
+                terminal.append("Compilado com sucesso!");
         }
         analisadorLexico.limpaArrays();
+        analisadorSintatico.limpaListaErros();
     }//GEN-LAST:event_botaoMenuCompilarActionPerformed
 
     private void botaoMenuExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuExecutarActionPerformed

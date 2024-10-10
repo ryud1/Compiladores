@@ -113,50 +113,52 @@ public interface Analisador_sintaticoConstants {
     "\"\\r\"",
     "<token of kind 5>",
     "<token of kind 6>",
-    "MAKE",
-    "END",
-    "CONST",
-    "VAR",
-    "GET",
-    "PUT",
-    "IF",
-    "ELSE",
-    "THEN",
-    "INT",
-    "REAL",
-    "CHAR",
-    "BOOL",
-    "TRUE",
-    "FALSE",
-    "DO",
-    "WHILE",
-    "PONTO",
-    "DOIS_PONTOS",
-    "PONTO_E_VIRGULA",
-    "ATRIBUICAO",
-    "VIRGULA",
-    "ABRE_PARENTESES",
-    "FECHA_PARENTESES",
-    "SOMA",
-    "SUBTRAÇÃO",
-    "MULTIPLICAÇÃO",
-    "DIVISÃO",
-    "EXPONENCIAÇÃO",
-    "DIVISAO_INTEIRA",
-    "RESTO_DIVISAO_INTEIRA",
-    "IGUAL",
-    "DIFERENTE",
-    "MENOR",
-    "MAIOR",
-    "MENOR_IGUAL",
-    "MAIOR_IGUAL",
-    "AND",
-    "OR",
-    "NOT",
-    "IDENTIFICADOR",
-    "CONSTANTES_INT",
-    "CONSTANTES_FLOAT",
-    "CONSTANTE_LITERAL_ASPAS",
-    "CONSTANTE_LITERAL_APOSTROFO",
+    //iniciador da linguagem
+    "Make",//make
+    //finalizador da linguagem
+    "End",//end
+    "Inicializador de declaração", // const
+    "Inicializador de declaração", // var
+    "Inicializador de comando", // get
+    "Inicializador de comando", //put
+    "Inicializador de comando", // if
+    "Else", // else
+    "Then", // then
+    "Tipo", // int
+    "Tipo", //real
+    "Tipo", //char
+    "Tipo",//bool
+    "Operador",//true
+    "Operador",//false
+    "Do",//do
+    "Inicializador de comando",//while
+    "Ponto",//ponto
+    "Dois Pontos",//dois pontos
+    "Virgula",//ponto e virgula
+    "Atribuição",//atribuição
+    "Separador",//virgula
+    "Agrupador",// (
+    "Fecha Agrupador",// )
+    "Operador",//+
+    "Operador",//-
+    "Operador",// *
+    "Operador",// /
+    "Operador",// **
+    "Operador",// %
+    "Operador",// %%
+    "Operador",// =
+    "Operador",// <>
+    "Operador",// <
+    "Operador",// >
+    "Operador",// <=
+    "Operador",//>=
+    "Operador",//&
+    "Operador",// |
+    "Operador",// !
+    "Identificador",
+    "Constante Numerica", //int
+    "Constante Numerica", //float
+    "Constante Literal",//aspas
+    "Constante Literal",//apostrofo
   };
 }
