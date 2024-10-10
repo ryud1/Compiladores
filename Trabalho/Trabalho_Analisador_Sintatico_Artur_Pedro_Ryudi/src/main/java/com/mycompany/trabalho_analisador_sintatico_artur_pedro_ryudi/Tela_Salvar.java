@@ -3,6 +3,7 @@ package com.mycompany.trabalho_analisador_sintatico_artur_pedro_ryudi;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -18,6 +19,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Tela_Salvar extends javax.swing.JDialog {
 
     private String painelTextSaved;
+
+    private String pathSaved;
+
+    private Tela2 pai;
 
     public String getPainelTextSaved() {
         return painelTextSaved;
@@ -37,8 +42,10 @@ public class Tela_Salvar extends javax.swing.JDialog {
         this.painelTextSaved = painelTextSaved;
     }
 
-    public Tela_Salvar(java.awt.Frame parent, boolean modal, String painelTextSaved) {
+    public Tela_Salvar(java.awt.Frame parent, boolean modal, String painelTextSaved, Tela2 pai) {
         super(parent, modal);
+        this.pathSaved = pathSaved;
+        this.pai = pai;
         initComponents();
         this.setPainelTextSaved(painelTextSaved);
         this.setLocationRelativeTo(null);
@@ -153,12 +160,12 @@ public class Tela_Salvar extends javax.swing.JDialog {
         JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Texto (.txt)", "txt");
         fc.setFileFilter(filter);
-
         int res = fc.showSaveDialog(this);
         if (res == JFileChooser.APPROVE_OPTION) {
             File arquivo = fc.getSelectedFile();
+            pathSaved = arquivo.getPath();
+            pai.setPathSaved(pathSaved);
             String filepath = arquivo.getPath();
-
             // Verifica se o arquivo tem a extensão .txt; se não, adiciona
             if (!filepath.toLowerCase().endsWith(".txt")) {
                 arquivo = new File(filepath + ".txt");
@@ -176,7 +183,6 @@ public class Tela_Salvar extends javax.swing.JDialog {
                     return null; // Se o usuário escolher "Não", retorna sem salvar
                 }
             }
-
             this.setFile(arquivo); // Atualiza a referência ao arquivo
 
             try (FileWriter writer = new FileWriter(arquivo)) {
@@ -238,14 +244,6 @@ public class Tela_Salvar extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Tela_Salvar dialog = new Tela_Salvar(new javax.swing.JFrame(), true, "");
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
             }
         });
     }

@@ -13,9 +13,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
+
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Caret;
@@ -47,6 +45,15 @@ public class Tela2 extends javax.swing.JFrame {
     private Analisador_sintatico analisadorSintatico;
     private TextLineNumber tln;
 
+    private String pathSaved = "./";
+
+    public String getPathSaved(){
+        return this.pathSaved;
+    }
+
+    public void setPathSaved(String path){
+        this.pathSaved = path;
+    }
 
     public String getPainelTextSaved() {
         return painelTextSaved;
@@ -416,7 +423,7 @@ public class Tela2 extends javax.swing.JFrame {
             terminal.setText("");
         } else {
             this.setPainelTextSaved(painelEditavel.getText());
-            Tela_Salvar telaSalvar = new Tela_Salvar(this, true, this.getPainelTextSaved());
+            Tela_Salvar telaSalvar = new Tela_Salvar(this, true, this.getPainelTextSaved(),this);
             int salvar = telaSalvar.getSalvar();
             File file = telaSalvar.getFile();
             this.setFile(file);
@@ -449,7 +456,7 @@ public class Tela2 extends javax.swing.JFrame {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        terminal.setText(resultado);
+        terminal.setText("");
         int qtdErros = analisadorLexico.getSizeLinhasErro();
         if (qtdErros > 0) {
             if (qtdErros == 1) {
@@ -463,18 +470,31 @@ public class Tela2 extends javax.swing.JFrame {
         } else if (painelEditavel.getText().equals("")) {
             terminal.append("Nada a compilar.");
         } else {
+            StringReader reader2 = new StringReader(painelEditavel.getText());
             if (this.analisadorSintatico == null) {
-                this.analisadorSintatico = new Analisador_sintatico(reader);
+                this.analisadorSintatico = new Analisador_sintatico(reader2);
             } else {
-                analisadorSintatico.ReInit(reader);
+                analisadorSintatico.ReInit(reader2);
             }
             analisadorSintatico.Analisador_sintatico();
-            for(String str :analisadorSintatico.getListaErros()){
-                terminal.append(str);
+            if(analisadorSintatico.getSizeListaErros() == 1){
+                terminal.append("Não foi compilado pois ocorreu um erro sintático:\n\n");
+                for(String str :analisadorSintatico.getListaErros()){
+                    terminal.append(str);
+                }
             }
-            terminal.append("\nCompilado com sucesso!");
+            else
+            if(analisadorSintatico.getSizeListaErros() > 1){
+                terminal.append("Não foi compilado pois ocorreram " + analisadorSintatico.getSizeListaErros() + " erros sintáticos:\n\n");
+                for(String str :analisadorSintatico.getListaErros()){
+                    terminal.append(str);
+                }
+            }
+            else
+                terminal.append("Compilado com sucesso!");
         }
         analisadorLexico.limpaArrays();
+        analisadorSintatico.limpaListaErros();
     }//GEN-LAST:event_botaoCompilarActionPerformed
 
     private void botaoExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExecutarActionPerformed
@@ -483,12 +503,13 @@ public class Tela2 extends javax.swing.JFrame {
 
     private void botaoAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAbrirActionPerformed
         if (painelEditavel.getText().equals("")) {
-            JFileChooser fc = new JFileChooser();
+            JFileChooser fc = new JFileChooser(pathSaved);
             fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Texto (.txt)", "txt");
             int res = fc.showOpenDialog(this);
             if (res == JFileChooser.APPROVE_OPTION) {
                 File arquivo = fc.getSelectedFile();
+                pathSaved = arquivo.getPath();
                 String fileName = arquivo.getName();
                 String conteudo = "";
                 try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
@@ -505,7 +526,7 @@ public class Tela2 extends javax.swing.JFrame {
             }
         } else {
             this.setPainelTextSaved(painelEditavel.getText());
-            Tela_Salvar telaSalvar = new Tela_Salvar(this, true, this.getPainelTextSaved());
+            Tela_Salvar telaSalvar = new Tela_Salvar(this, true, this.getPainelTextSaved(),this);
             int salvar = telaSalvar.getSalvar();
             File file = telaSalvar.getFile();
             this.setFile(file);
@@ -522,12 +543,13 @@ public class Tela2 extends javax.swing.JFrame {
                 painelEditavel.setText("");
                 terminal.setText("");
                 this.setFile(null);
-                JFileChooser fc = new JFileChooser();
+                JFileChooser fc = new JFileChooser(pathSaved);
                 fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Texto (.txt)", "txt");
                 int res = fc.showOpenDialog(this);
                 if (res == JFileChooser.APPROVE_OPTION) {
                     File arquivo = fc.getSelectedFile();
+                    pathSaved = arquivo.getPath();
                     String fileName = arquivo.getName();
                     String conteudo = "";
                     try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
@@ -562,7 +584,7 @@ public class Tela2 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Erro ao salvar o arquivo: " + ioException.getMessage());
             }
         } else {
-            JFileChooser fc = new JFileChooser();
+            JFileChooser fc = new JFileChooser(pathSaved);
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Texto (.txt)", "txt");
             fc.setFileFilter(filter);
             fc.setAcceptAllFileFilterUsed(false);
@@ -570,6 +592,7 @@ public class Tela2 extends javax.swing.JFrame {
             int res = fc.showSaveDialog(this);
             if (res == JFileChooser.APPROVE_OPTION) {
                 File arquivo = fc.getSelectedFile();
+                pathSaved = arquivo.getPath();
                 String filepath = arquivo.getPath();
 
                 if (!filepath.toLowerCase().endsWith(".txt")) {
@@ -590,7 +613,7 @@ public class Tela2 extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
     private void botaoSalvarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarComoActionPerformed
-        JFileChooser fc = new JFileChooser();
+        JFileChooser fc = new JFileChooser(pathSaved);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Texto (.txt)", "txt");
         fc.setFileFilter(filter);
         fc.setAcceptAllFileFilterUsed(false);
@@ -630,7 +653,7 @@ public class Tela2 extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoSalvarComoActionPerformed
 
     private void botaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairActionPerformed
-         Tela_Salvar telaSalvar = new Tela_Salvar(this, true, this.getPainelTextSaved());
+         Tela_Salvar telaSalvar = new Tela_Salvar(this, true, this.getPainelTextSaved(),this);
         int salvar = telaSalvar.getSalvar();
         int select = telaSalvar.getSelect();
         if (salvar == 0) {
@@ -754,7 +777,7 @@ public class Tela2 extends javax.swing.JFrame {
             terminal.setText("");
         } else {
             this.setPainelTextSaved(painelEditavel.getText());
-            Tela_Salvar telaSalvar = new Tela_Salvar(this, true, this.getPainelTextSaved());
+            Tela_Salvar telaSalvar = new Tela_Salvar(this, true, this.getPainelTextSaved(),this);
             int salvar = telaSalvar.getSalvar();
             File file = telaSalvar.getFile();
             this.setFile(file);
@@ -777,12 +800,13 @@ public class Tela2 extends javax.swing.JFrame {
 
     private void botaoIconAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIconAbrirActionPerformed
         if (painelEditavel.getText().equals("")) {
-            JFileChooser fc = new JFileChooser();
+            JFileChooser fc = new JFileChooser(pathSaved);
             fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Texto (.txt)", "txt");
             int res = fc.showOpenDialog(this);
             if (res == JFileChooser.APPROVE_OPTION) {
                 File arquivo = fc.getSelectedFile();
+                pathSaved = arquivo.getPath();
                 String fileName = arquivo.getName();
                 String conteudo = "";
                 try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
@@ -799,7 +823,7 @@ public class Tela2 extends javax.swing.JFrame {
             }
         } else {
             this.setPainelTextSaved(painelEditavel.getText());
-            Tela_Salvar telaSalvar = new Tela_Salvar(this, true, this.getPainelTextSaved());
+            Tela_Salvar telaSalvar = new Tela_Salvar(this, true, this.getPainelTextSaved(),this);
             int salvar = telaSalvar.getSalvar();
             File file = telaSalvar.getFile();
             this.setFile(file);
@@ -816,12 +840,13 @@ public class Tela2 extends javax.swing.JFrame {
                 painelEditavel.setText("");
                 terminal.setText("");
                 this.setFile(null);
-                JFileChooser fc = new JFileChooser();
+                JFileChooser fc = new JFileChooser(pathSaved);
                 fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Texto (.txt)", "txt");
                 int res = fc.showOpenDialog(this);
                 if (res == JFileChooser.APPROVE_OPTION) {
                     File arquivo = fc.getSelectedFile();
+                    pathSaved = arquivo.getPath();
                     String fileName = arquivo.getName();
                     String conteudo = "";
                     try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
@@ -856,7 +881,7 @@ public class Tela2 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Erro ao salvar o arquivo: " + ioException.getMessage());
             }
         } else {
-            JFileChooser fc = new JFileChooser();
+            JFileChooser fc = new JFileChooser(pathSaved);
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Texto (.txt)", "txt");
             fc.setFileFilter(filter);
             fc.setAcceptAllFileFilterUsed(false);
@@ -864,6 +889,7 @@ public class Tela2 extends javax.swing.JFrame {
             int res = fc.showSaveDialog(this);
             if (res == JFileChooser.APPROVE_OPTION) {
                 File arquivo = fc.getSelectedFile();
+                pathSaved = arquivo.getPath();
                 String filepath = arquivo.getPath();
 
                 if (!filepath.toLowerCase().endsWith(".txt")) {

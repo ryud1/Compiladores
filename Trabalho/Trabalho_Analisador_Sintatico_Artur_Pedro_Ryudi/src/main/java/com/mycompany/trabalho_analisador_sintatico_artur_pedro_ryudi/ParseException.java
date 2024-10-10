@@ -108,11 +108,10 @@ public class ParseException extends Exception {
         expected.append(tokenImage[expectedTokenSequences[i][j]]).append(' ');
       }
       if (expectedTokenSequences[i][expectedTokenSequences[i].length - 1] != 0) {
-        expected.append("...");
+        expected.append(", ");
       }
-      expected.append(eol).append("    ");
     }
-    String retval = "Encountered \"";
+    String retval = "Encontrado \"";
     Token tok = currentToken.next;
     for (int i = 0; i < maxSize; i++) {
       if (i != 0) retval += " ";
@@ -124,17 +123,17 @@ public class ParseException extends Exception {
       retval += " \"";
       retval += add_escapes(tok.image);
       retval += " \"";
-      tok = tok.next; 
+      tok = tok.next;
     }
-    retval += "\" at line " + currentToken.next.beginLine + ", column " + currentToken.next.beginColumn;
+    retval += "\" na linha " + currentToken.next.beginLine + ", coluna " + currentToken.next.beginColumn;
     retval += "." + eol;
     if (expectedTokenSequences.length == 1) {
-      retval += "Was expecting:" + eol + "    ";
+      retval += "Estava esperando:" + eol + "    ";
     } else {
-      retval += "Was expecting one of:" + eol + "    ";
+      retval += "Estava esperando um dos tokens a seguir:" + eol + "    ";
     }
     retval += expected.toString();
-    retval += "\n---\n";
+    retval += "\n---\n\n";
     return retval;
   }
 

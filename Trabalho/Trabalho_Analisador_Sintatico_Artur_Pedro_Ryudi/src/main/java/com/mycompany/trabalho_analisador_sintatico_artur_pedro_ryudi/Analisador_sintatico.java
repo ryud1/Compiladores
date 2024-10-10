@@ -14,14 +14,36 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
       return this.listaErroSintatico;
   }
 
+  public int getSizeListaErros(){
+    return this.listaErroSintatico.size();
+}
+
+  public void limpaListaErros(){
+    this.listaErroSintatico.clear();
+}
+
   final public void Analisador_sintatico() {
+    try{
     jj_consume_token(MAKE);
     jj_consume_token(IDENTIFICADOR);
+    }
+    catch(ParseException e){
+      String erro = "Erro na declaração inicial da Linguagem.\n";
+      erro += e.getMessage();
+      listaErroSintatico.add(erro);
+    }
     DecConstVar();
     ListaComandos();
+    try{
     jj_consume_token(END);
     jj_consume_token(PONTO);
     jj_consume_token(0);
+    }
+    catch(ParseException e){
+      String erro = "Erro na finalização da Linguagem.\n";
+      erro += e.getMessage();
+      listaErroSintatico.add(erro);
+    }
   }
 
   final public void DecConstVar(){
@@ -37,7 +59,14 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
         break;
       default:
         jj_la1[0] = jj_gen;
+        try{
         jj_consume_token(-1);
+        }
+        catch(ParseException e){
+          String erro = "Erro na declaração de constantes e variáveis.\n";
+          erro += e.getMessage();
+          listaErroSintatico.add(erro);
+        }
       }
       break;
     default:
@@ -79,20 +108,34 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
   }
 
   final public void DecVar()  {
+    try{
     jj_consume_token(VAR);
     ListaVar();
     jj_consume_token(END);
     jj_consume_token(PONTO_E_VIRGULA);
+    }
+    catch(ParseException e){
+      String erro = "Erro na declaração de variáveis.\n";
+      erro += e.getMessage();
+      listaErroSintatico.add(erro);
+    }
   }
 
   final public void DecConst()  {
+    try{
     jj_consume_token(CONST);
     ListaConst();
     jj_consume_token(END);
     jj_consume_token(PONTO_E_VIRGULA);
+    }
+    catch(ParseException e){
+      String erro = "Erro na declaração de constantes.\n";
+      erro += e.getMessage();
+      listaErroSintatico.add(erro);
+    }
   }
 
-  final public void ListaConst()  {
+  final public void ListaConst() throws ParseException {
     Tipo();
     jj_consume_token(DOIS_PONTOS);
     ListaIdent();
@@ -102,7 +145,7 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     ListaConstL();
   }
 
-  final public void ListaConstL()  {
+  final public void ListaConstL() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case INT:
     case REAL:
@@ -115,7 +158,7 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void Tipo()  {
+  final public void Tipo() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case INT:
       jj_consume_token(INT);
@@ -133,12 +176,12 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void ListaIdent()  {
+  final public void ListaIdent() throws ParseException {
     jj_consume_token(IDENTIFICADOR);
     ListaIdentL();
   }
 
-  final public void ListaIdentL()  {
+  final public void ListaIdentL() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case VIRGULA:
       jj_consume_token(VIRGULA);
@@ -150,7 +193,7 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void Valor()  {
+  final public void Valor() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case CONSTANTES_INT:
       jj_consume_token(CONSTANTES_INT);
@@ -167,11 +210,10 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     default:
       jj_la1[7] = jj_gen;
       jj_consume_token(-1);
-      
     }
   }
 
-  final public void ListaVar()  {
+  final public void ListaVar() throws ParseException {
     TipoB();
     jj_consume_token(DOIS_PONTOS);
     ListaIdent();
@@ -179,7 +221,7 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     ListaVarL();
   }
 
-  final public void ListaVarL()  {
+  final public void ListaVarL() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case INT:
     case REAL:
@@ -193,7 +235,7 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void TipoB()  {
+  final public void TipoB() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case INT:
       jj_consume_token(INT);
@@ -241,7 +283,7 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void Comando()  {
+  final public void Comando() {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case GET:
       Get();
@@ -268,35 +310,62 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
       break;
     default:
       jj_la1[11] = jj_gen;
+      try{
       jj_consume_token(-1);
-      
+      }
+      catch(ParseException e){
+        String erro = "Erro na declaração de comandos.\n";
+        erro += e.getMessage();
+        listaErroSintatico.add(erro);
+      }
     }
   }
 
-  final public void Atribuicao()  {
+  final public void Atribuicao() {
+    try{
     Expressao();
     jj_consume_token(ATRIBUICAO);
     jj_consume_token(IDENTIFICADOR);
     jj_consume_token(PONTO);
+    }
+    catch(ParseException e){
+      String erro = "Erro na declaração do comando de atribuição.\n";
+      erro += e.getMessage();
+      listaErroSintatico.add(erro);
+    }
   }
 
-  final public void Get()  {
+  final public void Get() {
+    try{
     jj_consume_token(GET);
     jj_consume_token(ABRE_PARENTESES);
     ListaIdent();
     jj_consume_token(FECHA_PARENTESES);
     jj_consume_token(PONTO);
+    }
+    catch(ParseException e){
+      String erro = "Erro na declaração do comando \"get\".\n";
+      erro += e.getMessage();
+      listaErroSintatico.add(erro);
+    }
   }
 
-  final public void Put()  {
+  final public void Put() {
+    try{
     jj_consume_token(PUT);
     jj_consume_token(ABRE_PARENTESES);
     ListaDecIdentConst();
     jj_consume_token(FECHA_PARENTESES);
     jj_consume_token(PONTO);
+    }
+    catch(ParseException e){
+      String erro = "Erro na declaração do comando \"put\".\n";
+      erro += e.getMessage();
+      listaErroSintatico.add(erro);
+    }
   }
 
-  final public void ListaDecIdentConst()  {
+  final public void ListaDecIdentConst() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case IDENTIFICADOR:
       jj_consume_token(IDENTIFICADOR);
@@ -316,7 +385,7 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void ListaDecIdentConstL()  {
+  final public void ListaDecIdentConstL() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case VIRGULA:
       jj_consume_token(VIRGULA);
@@ -328,7 +397,8 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void If()  {
+  final public void If() {
+    try{
     jj_consume_token(IF);
     Expressao();
     jj_consume_token(THEN);
@@ -336,9 +406,15 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     TemElse();
     jj_consume_token(END);
     jj_consume_token(PONTO);
+    }
+    catch(ParseException e){
+      String erro = "Erro na declaração do comando \"if\".\n";
+      erro += e.getMessage();
+      listaErroSintatico.add(erro);
+    }
   }
 
-  final public void TemElse()  {
+  final public void TemElse() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case ELSE:
       jj_consume_token(ELSE);
@@ -350,21 +426,35 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void While()  {
+  final public void While() {
+    try{
     jj_consume_token(WHILE);
     Expressao();
     jj_consume_token(DO);
     ListaComandos();
     jj_consume_token(END);
     jj_consume_token(PONTO);
+    }
+    catch(ParseException e){
+      String erro = "Erro na declaração do comando \"while\".\n";
+      erro += e.getMessage();
+      listaErroSintatico.add(erro);
+    }
   }
 
   final public void Expressao()  {
+    try{
     AritOuLogica();
     ExpressaoL();
+    }
+    catch(ParseException e){
+      String erro = "Erro na declaração da expressão\n";
+      erro += e.getMessage();
+      listaErroSintatico.add(erro);
+    }
   }
 
-  final public void ExpressaoL()  {
+  final public void ExpressaoL() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case IGUAL:
     case DIFERENTE:
@@ -409,12 +499,12 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void AritOuLogica()  {
+  final public void AritOuLogica() throws ParseException {
     Termo2();
     BaixaPrioridade();
   }
 
-  final public void BaixaPrioridade()  {
+  final public void BaixaPrioridade() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case MAIS:
     case MENOS:
@@ -447,7 +537,7 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void MediaPrioridade()  {
+  final public void MediaPrioridade() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case MULTIPLICACAO:
     case DIVISAO:
@@ -492,17 +582,17 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void Termo2()  {
+  final public void Termo2() throws ParseException {
     Termo1();
     MediaPrioridade();
   }
 
-  final public void Termo1()  {
+  final public void Termo1() throws ParseException {
     Elemento();
     AltaPrioridade();
   }
 
-  final public void AltaPrioridade()  {
+  final public void AltaPrioridade() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case EXPONENCIAL:
       jj_consume_token(EXPONENCIAL);
@@ -515,7 +605,7 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void Elemento()  {
+  final public void Elemento() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case IDENTIFICADOR:
       jj_consume_token(IDENTIFICADOR);
@@ -650,7 +740,7 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     for (int i = 0; i < 23; i++) jj_la1[i] = -1;
   }
 
-  private Token jj_consume_token(int kind){
+  private Token jj_consume_token(int kind) throws ParseException{
     Token oldToken;
     if ((oldToken = token).next != null) token = token.next;
     else token = token.next = token_source.getNextToken();
@@ -661,8 +751,7 @@ public class Analisador_sintatico implements Analisador_sintaticoConstants {
     }
     token = oldToken;
     jj_kind = kind;
-    listaErroSintatico.add(generateParseException().getMessage());
-    return null;
+    throw generateParseException();
   }
 
 
