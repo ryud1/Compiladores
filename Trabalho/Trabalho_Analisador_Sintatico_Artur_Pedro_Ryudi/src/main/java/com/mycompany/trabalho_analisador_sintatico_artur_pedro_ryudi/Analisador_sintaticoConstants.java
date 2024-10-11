@@ -124,17 +124,17 @@ public interface Analisador_sintaticoConstants {
     "Inicializador de comando", // if
     "Else", // else
     "Then", // then
-    "Tipo", // int
-    "Tipo", //real
-    "Tipo", //char
-    "Tipo",//bool
+    "Tipo Var/Const", // int
+    "Tipo Var/Const", //real
+    "Tipo Var/Const", //char
+    "Tipo Var",//bool
     "Operador",//true
     "Operador",//false
     "Do",//do
     "Inicializador de comando",//while
     "Ponto",//ponto
     "Dois Pontos",//dois pontos
-    "Virgula",//ponto e virgula
+    "Ponto e Virgula",//ponto e virgula
     "Atribuição",//atribuição
     "Separador",//virgula
     "Agrupador",// (

@@ -175,7 +175,6 @@ public class Tela2 extends javax.swing.JFrame {
                 botaoCompilarActionPerformed(evt);
             }
         });
-
         botaoExecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Play.png"))); // NOI18N
         botaoExecutar.setToolTipText("Executar");
         botaoExecutar.setAlignmentY(0.0F);
@@ -491,6 +490,7 @@ public class Tela2 extends javax.swing.JFrame {
                 for(String str :analisadorSintatico.getListaErros()){
                     terminal.append(str);
                 }
+                analisadorSintatico.limpaListaErros();
             }
             else
             if(analisadorSintatico.getSizeListaErros() > 1){
@@ -498,12 +498,13 @@ public class Tela2 extends javax.swing.JFrame {
                 for(String str :analisadorSintatico.getListaErros()){
                     terminal.append(str);
                 }
+                analisadorSintatico.limpaListaErros();
             }
             else
-                terminal.append("Compilado com sucesso!");
+                terminal.append("Compilado com sucesso e sintaticamente correto!");
+                analisadorSintatico.limpaListaErros();
         }
         analisadorLexico.limpaArrays();
-        analisadorSintatico.limpaListaErros();
     }//GEN-LAST:event_botaoCompilarActionPerformed
 
     private void botaoExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExecutarActionPerformed
@@ -728,6 +729,7 @@ public class Tela2 extends javax.swing.JFrame {
                 for(String str :analisadorSintatico.getListaErros()){
                     terminal.append(str);
                 }
+                analisadorSintatico.limpaListaErros();
             }
             else
             if(analisadorSintatico.getSizeListaErros() > 1){
@@ -735,12 +737,13 @@ public class Tela2 extends javax.swing.JFrame {
                 for(String str :analisadorSintatico.getListaErros()){
                     terminal.append(str);
                 }
+                analisadorSintatico.limpaListaErros();
             }
             else
-                terminal.append("Compilado com sucesso!");
+                terminal.append("Compilado com sucesso e sintaticamente correto!");
+                analisadorSintatico.limpaListaErros();
         }
         analisadorLexico.limpaArrays();
-        analisadorSintatico.limpaListaErros();
     }//GEN-LAST:event_botaoMenuCompilarActionPerformed
 
     private void botaoMenuExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuExecutarActionPerformed
