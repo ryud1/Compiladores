@@ -5,9 +5,9 @@ public class Instrucao {
     
     private int numero;
     private String codigo;
-    private float param;
+    private String param;
 
-    public Instrucao(int numero, String codigo, float param) {
+    public Instrucao(int numero, String codigo, String param) {
         this.codigo = codigo;
         this.numero = numero;
         this.param = param;
@@ -24,10 +24,10 @@ public class Instrucao {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    public float getParam() {
+    public String getParam() {
         return param;
     }
-    public void setParam(int param) {
+    public void setParam(String param) {
         this.param = param;
     }
     

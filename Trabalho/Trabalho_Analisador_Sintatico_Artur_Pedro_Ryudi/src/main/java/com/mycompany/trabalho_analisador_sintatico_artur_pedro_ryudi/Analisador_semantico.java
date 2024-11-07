@@ -55,18 +55,35 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
 
   private ArrayList<Instrucao> AreaInstrucoes = new ArrayList<>();
 
-  public void addAreaInstrucoes(int numero, String codigo, float param){
+  public void addAreaInstrucoes(int numero, String codigo, String param){
       AreaInstrucoes.add(new Instrucao(numero,codigo,param));
+  }
+
+  public Instrucao getInstrucaoAreaInstrucoes(int endereco){
+    for(Instrucao i: AreaInstrucoes){
+      if(i.getNumero() == endereco)
+        return i;
+    }
+    return null;
+    //Erro
   }
 
   private ArrayList<Simbolo> TabelaSimbolos = new ArrayList<>();
 
-  public Float getKeyValueTabelaSimbolos(String chave){
+  public boolean existTabelaSimbolos(String identificador){
+      for(Simbolo s: TabelaSimbolos){
+        if(s.getNome().equals(identificador))
+          return true;
+      }
+      return false;
+  }
+
+  public Simbolo getKeySimbolTabelaSimbolos(String chave){
     for (Simbolo s:TabelaSimbolos){
       if(s.getNome().equals(chave))
-        return s.getAtributo();
+        return s;
     }
-    return 0f; // erro
+    return null; // erro
   }
 
   public void addtabelaSimbolos(String nome, String categoria,float atributo){
@@ -74,6 +91,22 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
   }
 
   private ArrayList<Integer> pilhaDesvios = new ArrayList<>();
+
+  public ArrayList<Integer> getPilhaDesvios(){
+    return this.pilhaDesvios;
+  }
+
+  public void empilharDesvios(int dado){
+    this.pilhaDesvios.add(dado);
+  }
+
+  public int desempilharPilhaDesvios(){
+    int ultimoIndice = pilhaDesvios.size() - 1;
+    int ultimoValor = pilhaDesvios.get(ultimoIndice);
+    pilhaDesvios.remove(ultimoIndice);
+
+    return ultimoValor;
+  }
 
   private ArrayList<String> listaErroSemantico = new ArrayList<>();
 
@@ -90,13 +123,21 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
 }
 
   final public void Analisador_semantico() {
-    jj_consume_token(MAKE);
-    IdentificadorPrograma();
-    DecConstVar();
-    ListaComandos();
+    try{
+      jj_consume_token(MAKE);
+      IdentificadorPrograma();
+      DecConstVar();
+      ListaComandos();
       jj_consume_token(END);
       jj_consume_token(PONTO);
+      Ações.acao1(this);
       jj_consume_token(0);
+    }
+    catch(ParseException e){
+      String erro = "Erro na declaração de constantes e variáveis.\n";
+      erro += e.getMessage();
+      listaErroSemantico.add(erro);
+    }
   }
 
   final public void IdentificadorPrograma() throws ParseException {
@@ -110,7 +151,7 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void DecConstVar() {
+  final public void DecConstVar() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case CONST:
       DecConst();
@@ -122,29 +163,16 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
       break;
     default:
       jj_la1[1] = jj_gen;
-      try{
-        jj_consume_token(-1);
-        }
-        catch(ParseException e){
-          String erro = "Erro na declaração de constantes e variáveis.\n";
-          erro += e.getMessage();
-          listaErroSemantico.add(erro);
-        }
+      jj_consume_token(-1);
+        
     }
   }
 
-  final public void DecConst() {
-    try{
+  final public void DecConst() throws ParseException {
     jj_consume_token(CONST);
     Constantes();
     jj_consume_token(END);
     jj_consume_token(PONTO_E_VIRGULA);
-    }
-    catch(ParseException e){
-      String erro = "Erro na declaração de constantes.\n";
-      erro += e.getMessage();
-      listaErroSemantico.add(erro);
-    }
   }
 
   final public void Constantes() throws ParseException {
@@ -192,7 +220,7 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void Constantes3() {
+  final public void Constantes3() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case CONST:
       DecConst();
@@ -203,18 +231,12 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void DecVar() {
-    try{
+  final public void DecVar() throws ParseException {
       jj_consume_token(VAR);
       Variaveis();
       jj_consume_token(END);
       jj_consume_token(PONTO_E_VIRGULA);
-    }
-    catch(ParseException e){
-      String erro = "Erro na declaração de variáveis.\n";
-      erro += e.getMessage();
-      listaErroSemantico.add(erro);
-    }
+
   }
 
   final public void Variaveis() throws ParseException {
@@ -239,7 +261,7 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void Variaveis3() {
+  final public void Variaveis3() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case VAR:
       DecVar();
@@ -288,20 +310,13 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void ListaComandos() {
-    try{
+  final public void ListaComandos() throws ParseException {
     Comando();
     jj_consume_token(PONTO);
-    }
-    catch(ParseException e){
-      String erro = "Erro na declaração de comandos.\n";
-      erro += e.getMessage();
-      listaErroSemantico.add(erro);
-    }
     ListaComandos2();
   }
 
-  final public void ListaComandos2() {
+  final public void ListaComandos2() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case GET:
     case PUT:
@@ -355,45 +370,24 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void Atribuicao() {
-    try{
+  final public void Atribuicao() throws ParseException {
       Expressao();
       jj_consume_token(ATRIBUICAO);
       jj_consume_token(IDENTIFICADOR);
-    }
-    catch(ParseException e){
-      String erro = "Erro na declaração do comando de atribuição.\n";
-      erro += e.getMessage();
-      listaErroSemantico.add(erro);
-    }
   }
 
-  final public void Entrada() {
-    try{
+  final public void Entrada() throws ParseException {
       jj_consume_token(GET);
       jj_consume_token(ABRE_PARENTESES);
       ListaIdent();
       jj_consume_token(FECHA_PARENTESES);
-    }
-    catch(ParseException e){
-      String erro = "Erro na declaração do comando \"get\".\n";
-      erro += e.getMessage();
-      listaErroSemantico.add(erro);
-    }
   }
 
-  final public void Saida() {
-    try{
+  final public void Saida() throws ParseException {
     jj_consume_token(PUT);
     jj_consume_token(ABRE_PARENTESES);
     ListaIdentConst();
     jj_consume_token(FECHA_PARENTESES);
-  }
-  catch(ParseException e){
-    String erro = "Erro na declaração do comando \"put\".\n";
-    erro += e.getMessage();
-    listaErroSemantico.add(erro);
-  }
   }
 
   final public void ListaIdentConst() throws ParseException {
@@ -443,20 +437,13 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void Selecao() {
-    try{
+  final public void Selecao() throws ParseException {
     jj_consume_token(IF);
     Expressao();
     jj_consume_token(THEN);
     ListaComandos();
     Senao();
     jj_consume_token(END);
-  }
-  catch(ParseException e){
-    String erro = "Erro na declaração do comando \"if\".\n";
-    erro += e.getMessage();
-    listaErroSemantico.add(erro);
-  }
   }
 
   final public void Senao() throws ParseException {
@@ -471,31 +458,17 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     }
   }
 
-  final public void Repeticao() {
-    try{
+  final public void Repeticao() throws ParseException {
     jj_consume_token(WHILE);
     Expressao();
     jj_consume_token(DO);
     ListaComandos();
     jj_consume_token(END);
   }
-  catch(ParseException e){
-    String erro = "Erro na declaração do comando \"while\".\n";
-    erro += e.getMessage();
-    listaErroSemantico.add(erro);
-  }
-  }
 
-  final public void Expressao()  {
-    try{
+  final public void Expressao() throws ParseException {
     ExpressaoAritLog();
     Expressao2();
-  }
-  catch(ParseException e){
-    String erro = "Erro na declaração da expressão\n";
-    erro += e.getMessage();
-    listaErroSemantico.add(erro);
-  }
   }
 
   final public void Expressao2() throws ParseException {
