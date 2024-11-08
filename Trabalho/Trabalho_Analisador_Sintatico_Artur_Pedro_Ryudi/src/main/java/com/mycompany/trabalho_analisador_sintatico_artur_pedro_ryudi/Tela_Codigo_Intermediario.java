@@ -20,7 +20,7 @@ public class Tela_Codigo_Intermediario extends javax.swing.JDialog {
         initComponents();
         this.setTitle("Código Objeto");
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        this.setVisible(false);
     }
 
     /**
@@ -103,14 +103,14 @@ public class Tela_Codigo_Intermediario extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Tela_Codigo_Intermediario dialog = new Tela_Codigo_Intermediario(new javax.swing.JFrame(), true);
+                Tela_Codigo_Intermediario dialog = new Tela_Codigo_Intermediario(new javax.swing.JFrame(), false);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
                 });
-                dialog.setVisible(true);
+                dialog.setVisible(false);
             }
         });
     }
@@ -119,6 +119,11 @@ public class Tela_Codigo_Intermediario extends javax.swing.JDialog {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.addRow(new Object[]{ponteiro, codigo, parametro});
     }
+    public void removeAllRows(){
+        DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+        dtm.setRowCount(0);
+    }
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

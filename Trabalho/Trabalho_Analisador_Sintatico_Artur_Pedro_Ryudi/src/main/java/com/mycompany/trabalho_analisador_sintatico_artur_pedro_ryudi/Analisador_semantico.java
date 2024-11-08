@@ -82,6 +82,10 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
   public ArrayList<Instrucao> getAreaInstrucoes(){
     return this.AreaInstrucoes;
   }
+  
+  public void resetAreaInstrucoes(){
+      AreaInstrucoes.clear();
+  }
 
   private ArrayList<Simbolo> TabelaSimbolos = new ArrayList<>();
 
@@ -92,7 +96,13 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
       }
       return false;
   }
-
+  
+  public void printTabelaSimbolos(){
+      for(Simbolo s: TabelaSimbolos){
+            System.out.println("chegou no print");
+            System.out.println(s);
+      }
+  }
   public Simbolo getKeySimbolTabelaSimbolos(String chave){
     for (Simbolo s:TabelaSimbolos){
       if(s.getNome().equals(chave))
@@ -717,7 +727,7 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
   public Token token;
 
   public String getCurrentTokenImage() {
-    return tokenImage[0];
+    return token.image;
   }
 
   /** Next token. */

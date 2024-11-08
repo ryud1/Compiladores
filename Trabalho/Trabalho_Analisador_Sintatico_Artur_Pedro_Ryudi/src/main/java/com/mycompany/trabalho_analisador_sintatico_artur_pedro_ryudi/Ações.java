@@ -19,7 +19,7 @@ public class Ações {
         switch(as.getTipo()){
             case 1:
             case 5:
-                as.addAreaInstrucoes(as.getPonteiro(),"ALI",Integer.toString(as.getVp()));
+                as.addAreaInstrucoes(as.getPonteiro(),"ALI", Integer.toString(as.getVp()));
                 as.setPonteiro(as.getPonteiro()+1);
                 break;
             case 2:
@@ -42,17 +42,35 @@ public class Ações {
             as.setVp(0);       
     }
 
-    public static void acao5(Analisador_semantico as){
+    public static void acao5(Analisador_semantico as) throws ParseException{
         switch(as.getTipo()){
             case 5:
+                try{
+                    int aux = Integer.parseInt(as.getCurrentTokenImage());
+                }catch(Exception e){
+                    as.setErroSemantico("erro semântico na linha "+  as.token.beginLine +", coluna "+ as.token.beginColumn +": Tipo invalido para atribuição de constante");
+                    throw new ParseException();
+                }
                 as.addAreaInstrucoes(as.getPonteiro(), "LDI",as.getCurrentTokenImage());
                 break;
             case 6:
+                try{
+                    Float aux = Float.parseFloat(as.getCurrentTokenImage());
+                }catch(Exception e){
+                    as.setErroSemantico("erro semântico na linha "+  as.token.beginLine +", coluna "+ as.token.beginColumn +": Tipo invalido para atribuição de constante");
+                    throw new ParseException();
+                }
                 as.addAreaInstrucoes(as.getPonteiro(), "LDR", as.getCurrentTokenImage());
                 break;
             case 7:
-                as.addAreaInstrucoes(as.getPonteiro(), "LDS", Float.toString(as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getAtributo()));
-                break;
+                if((as.getCurrentTokenImage().substring(0, 1).equals("\"") && as.getCurrentTokenImage().substring(as.getCurrentTokenImage().length()-1, as.getCurrentTokenImage().length()).equals("\"")) 
+                        || (as.getCurrentTokenImage().substring(0, 1).equals("'") && as.getCurrentTokenImage().substring(as.getCurrentTokenImage().length()-1, as.getCurrentTokenImage().length()).equals("'"))){
+                    as.addAreaInstrucoes(as.getPonteiro(), "LDS", as.getCurrentTokenImage());
+                    break;
+                }else{
+                    as.setErroSemantico("erro semântico na linha "+  as.token.beginLine +", coluna "+ as.token.beginColumn +": Tipo invalido para atribuição de constante");
+                    throw new ParseException();
+                }
         }
         as.addAreaInstrucoes(as.getPonteiro(), "STC", Integer.toString(as.getVp()));
         as.setPonteiro(as.getPonteiro()+1);
@@ -92,18 +110,18 @@ public class Ações {
             as.setTipo(4);
         }else{
             //erro: "tipo invalido para constante"
-            as.setErroSemantico("erro semântico na linha "+ /*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Tipo invalido para constante");
+            as.setErroSemantico("erro semântico na linha "+  as.token.beginLine +", coluna "+ as.token.beginColumn +": Tipo invalido para constante");
             throw new ParseException();
         }
     }
 
     public static void acao11(Analisador_semantico as) throws ParseException{
         switch (as.getContexto()) {
-            case "Constante":   
+            case "Constante":
             case "Variavel":
                 if (as.existTabelaSimbolos(as.getCurrentTokenImage())) {
                     //erro: “identificador já declarado”    
-                    as.setErroSemantico("erro semântico na linha "+ /*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Identificador já declarado");
+                    as.setErroSemantico("erro semântico na linha "+ as.token.beginLine +", coluna "+ as.token.beginColumn +": Identificador já declarado");
                     throw new ParseException();
                 }
                 else{
@@ -124,13 +142,13 @@ public class Ações {
                         as.setPonteiro(as.getPonteiro()+1);
                     }else{
                         //erro:  “identificador de programa ou de constante”
-                        as.setErroSemantico("erro semântico na linha "+ /*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Identificador de programa ou de constante");
+                        as.setErroSemantico("erro semântico na linha "+  as.token.beginLine +", coluna "+ as.token.beginColumn +": Identificador de programa ou de constante");
                         throw new ParseException();
                     }
                 }
                 else{
                     //erro: “identificador não declarado”
-                    as.setErroSemantico("erro semântico na linha "+ /*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Identificador não declarado");
+                    as.setErroSemantico("erro semântico na linha "+  as.token.beginLine +", coluna "+ as.token.beginColumn +": Identificador não declarado");
                     throw new ParseException();
                 } 
         }
@@ -146,14 +164,14 @@ public class Ações {
                 as.setPonteiro(as.getPonteiro()+1);
             }else{
                 //erro:  “identificador de programa ou de constante”
-                as.setErroSemantico("erro semântico na linha "+ /*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Identificador de programa ou de constante");
+                as.setErroSemantico("erro semântico na linha "+  as.token.beginLine +", coluna "+ as.token.beginColumn +": Identificador de programa ou de constante");
                 throw new ParseException();
                 
             }
         }
         else{
             //erro: “identificador não declarado”
-            as.setErroSemantico("erro semântico na linha "+ /*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Identificador não declarado");
+            as.setErroSemantico("erro semântico na linha "+  as.token.beginLine +", coluna "+ as.token.beginColumn +": Identificador não declarado");
             throw new ParseException();
         } 
     }
@@ -175,12 +193,12 @@ public class Ações {
                 as.setPonteiro(as.getPonteiro()+1);
             }else{
                 //erro: "identificador de programa"
-                as.setErroSemantico("erro semântico na linha "+/*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Identificador de programa");
+                as.setErroSemantico("erro semântico na linha "+ as.token.beginLine +", coluna "+ as.token.beginColumn +": Identificador de programa");
                 throw new ParseException();
             }
         }else{
             //erro:"identificador nao declarado"
-            as.setErroSemantico("erro semântico na linha "+ /*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Identificador nao declarado");
+            as.setErroSemantico("erro semântico na linha "+  as.token.beginLine +", coluna "+ as.token.beginColumn +": Identificador nao declarado");
             throw new ParseException();
         }
     }
