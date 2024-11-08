@@ -43,6 +43,7 @@ public class Tela2 extends javax.swing.JFrame {
     
     private Analisador_lexico analisadorLexico;
     private Analisador_sintatico analisadorSintatico;
+    private Analisador_semantico analisadorSemantico;
     private TextLineNumber tln;
 
     private String pathSaved = "./";
@@ -500,9 +501,26 @@ public class Tela2 extends javax.swing.JFrame {
                 }
                 analisadorSintatico.limpaListaErros();
             }
-            else
-                terminal.append("Compilado com sucesso e sintaticamente correto!");
+            else{
+                StringReader reader3 = new StringReader(painelEditavel.getText());
+                if (this.analisadorSemantico == null) {
+                    this.analisadorSemantico = new Analisador_semantico(reader3);
+                } else {
+                    analisadorSintatico.ReInit(reader2);
+                }
+                analisadorSemantico.Analisador_semantico();
+                if(!analisadorSemantico.getErroSemantico().equals("")){
+                    terminal.append("Não foi executado pois ocorreu um "+analisadorSemantico.getErroSemantico());
+                    analisadorSemantico.setErroSemantico("");
+                }else{
+                    Tela_Codigo_Intermediario telaCodigoIntermediario = new Tela_Codigo_Intermediario(this,false);
+                    for(Instrucao i:analisadorSemantico.getAreaInstrucoes()){
+                        telaCodigoIntermediario.addRow(Integer.toString(i.getNumero()), i.getCodigo(), i.getParam());
+                    }
+                }
+
                 analisadorSintatico.limpaListaErros();
+            }
         }
         analisadorLexico.limpaArrays();
     }//GEN-LAST:event_botaoCompilarActionPerformed
@@ -957,7 +975,7 @@ public class Tela2 extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoIconColarActionPerformed
 
     private void botaoIconBoiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIconBoiaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_botaoIconBoiaActionPerformed
 
     /**

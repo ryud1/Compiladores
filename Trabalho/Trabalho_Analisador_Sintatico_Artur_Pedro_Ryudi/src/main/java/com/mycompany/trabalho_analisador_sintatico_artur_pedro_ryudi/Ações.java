@@ -87,20 +87,24 @@ public class Ações {
         }
     }
 
-    public static void acao10(Analisador_semantico as){
+    public static void acao10(Analisador_semantico as) throws ParseException {
         if(as.getContexto().equals("Variavel")){
             as.setTipo(4);
         }else{
             //erro: "tipo invalido para constante"
+            as.setErroSemantico("erro semântico na linha "+ /*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Tipo invalido para constante");
+            throw new ParseException();
         }
     }
 
-    public static void acao11(Analisador_semantico as){
+    public static void acao11(Analisador_semantico as) throws ParseException{
         switch (as.getContexto()) {
             case "Constante":   
             case "Variavel":
                 if (as.existTabelaSimbolos(as.getCurrentTokenImage())) {
                     //erro: “identificador já declarado”    
+                    as.setErroSemantico("erro semântico na linha "+ /*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Identificador já declarado");
+                    throw new ParseException();
                 }
                 else{
                     as.setVt(as.getVt()+1);
@@ -120,15 +124,19 @@ public class Ações {
                         as.setPonteiro(as.getPonteiro()+1);
                     }else{
                         //erro:  “identificador de programa ou de constante”
+                        as.setErroSemantico("erro semântico na linha "+ /*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Identificador de programa ou de constante");
+                        throw new ParseException();
                     }
                 }
                 else{
                     //erro: “identificador não declarado”
+                    as.setErroSemantico("erro semântico na linha "+ /*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Identificador não declarado");
+                    throw new ParseException();
                 } 
         }
     }
 
-    public static void acao12(Analisador_semantico as){
+    public static void acao12(Analisador_semantico as) throws ParseException {
         if(as.existTabelaSimbolos(as.getCurrentTokenImage())){
             if(as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getCategoria().equals("1")
             ||as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getCategoria().equals("2")
@@ -138,10 +146,15 @@ public class Ações {
                 as.setPonteiro(as.getPonteiro()+1);
             }else{
                 //erro:  “identificador de programa ou de constante”
+                as.setErroSemantico("erro semântico na linha "+ /*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Identificador de programa ou de constante");
+                throw new ParseException();
+                
             }
         }
         else{
             //erro: “identificador não declarado”
+            as.setErroSemantico("erro semântico na linha "+ /*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Identificador não declarado");
+            throw new ParseException();
         } 
     }
 
@@ -154,7 +167,7 @@ public class Ações {
     }
 
 
-    public static void acao15(Analisador_semantico as){
+    public static void acao15(Analisador_semantico as) throws ParseException {
         if(as.existTabelaSimbolos(as.getCurrentTokenImage())){
             if(!as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getCategoria().equals("0")){
                 Simbolo curToken = as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage());
@@ -162,9 +175,13 @@ public class Ações {
                 as.setPonteiro(as.getPonteiro()+1);
             }else{
                 //erro: "identificador de programa"
+                as.setErroSemantico("erro semântico na linha "+/*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Identificador de programa");
+                throw new ParseException();
             }
         }else{
             //erro:"identificador nao declarado"
+            as.setErroSemantico("erro semântico na linha "+ /*as.token.next.beginLine +", coluna "+ as.token.next.beginColumn +*/": Identificador nao declarado");
+            throw new ParseException();
         }
     }
 

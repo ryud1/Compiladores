@@ -8,8 +8,19 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
         Analisador_semantico analisador2 = new Analisador_semantico(System.in);
         analisador2.Analisador_semantico();
     }
-    
+  
+  private String erroSemantico = "";
+
+  public String getErroSemantico() {
+    return erroSemantico;
+  }
+
+  public void setErroSemantico(String erroSemantico) {
+    this.erroSemantico = erroSemantico;
+  }
+
   private String contexto;
+  
 
   public int getPonteiro() {
     return ponteiro;
@@ -19,7 +30,7 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     this.ponteiro = ponteiro;
   }
 
-  private int vt, vp, tipo, ponteiro;
+  private int vt, vp, tipo, ponteiro = 1;
 
   public String getContexto() {
     return contexto;
@@ -68,6 +79,10 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     //Erro
   }
 
+  public ArrayList<Instrucao> getAreaInstrucoes(){
+    return this.AreaInstrucoes;
+  }
+
   private ArrayList<Simbolo> TabelaSimbolos = new ArrayList<>();
 
   public boolean existTabelaSimbolos(String identificador){
@@ -108,20 +123,6 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     return ultimoValor;
   }
 
-  private ArrayList<String> listaErroSemantico = new ArrayList<>();
-
-  public ArrayList<String> getListaErros(){
-      return this.listaErroSemantico;
-  }
-
-  public int getSizeListaErros(){
-    return this.listaErroSemantico.size();
-}
-
-  public void limpaListaErros(){
-    this.listaErroSemantico.clear();
-}
-
   final public void Analisador_semantico() {
     try{
       jj_consume_token(MAKE);
@@ -134,9 +135,6 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
       jj_consume_token(0);
     }
     catch(ParseException e){
-      String erro = "Erro na declaração de constantes e variáveis.\n";
-      erro += e.getMessage();
-      listaErroSemantico.add(erro);
     }
   }
 
@@ -144,6 +142,7 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case IDENTIFICADOR:
       jj_consume_token(IDENTIFICADOR);
+      Ações.acao2(this);
       break;
     default:
       jj_la1[0] = jj_gen;
@@ -170,6 +169,7 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
 
   final public void DecConst() throws ParseException {
     jj_consume_token(CONST);
+    Ações.acao3(this);
     Constantes();
     jj_consume_token(END);
     jj_consume_token(PONTO_E_VIRGULA);
@@ -179,8 +179,10 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     Tipo();
     jj_consume_token(DOIS_PONTOS);
     ListaIdent();
+    Ações.acao4(this);
     jj_consume_token(IGUAL);
     Valor();
+    Ações.acao5(this);
     jj_consume_token(PONTO);
     Constantes2();
   }
@@ -233,16 +235,17 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
 
   final public void DecVar() throws ParseException {
       jj_consume_token(VAR);
+      Ações.acao6(this);
       Variaveis();
       jj_consume_token(END);
       jj_consume_token(PONTO_E_VIRGULA);
-
   }
 
   final public void Variaveis() throws ParseException {
     Tipo();
     jj_consume_token(DOIS_PONTOS);
     ListaIdent();
+    Ações.acao4(this);
     jj_consume_token(PONTO);
     Variaveis2();
   }
@@ -276,15 +279,19 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case INT:
       jj_consume_token(INT);
+      Ações.acao7(this);
       break;
     case REAL:
       jj_consume_token(REAL);
+      Ações.acao8(this);
       break;
     case CHAR:
       jj_consume_token(CHAR);
+      Ações.acao9(this);
       break;
     case BOOL:
       jj_consume_token(BOOL);
+      Ações.acao10(this);
       break;
     default:
       jj_la1[7] = jj_gen;
@@ -295,6 +302,7 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
 
   final public void ListaIdent() throws ParseException {
     jj_consume_token(IDENTIFICADOR);
+    Ações.acao11(this);
     ListaIdent2();
   }
 
@@ -374,10 +382,12 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
       Expressao();
       jj_consume_token(ATRIBUICAO);
       jj_consume_token(IDENTIFICADOR);
+      Ações.acao12(this);
   }
 
   final public void Entrada() throws ParseException {
       jj_consume_token(GET);
+      Ações.acao13(this);
       jj_consume_token(ABRE_PARENTESES);
       ListaIdent();
       jj_consume_token(FECHA_PARENTESES);
@@ -392,6 +402,7 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
 
   final public void ListaIdentConst() throws ParseException {
     Item();
+    Ações.acao14(this);
     ListaIdentConst2();
   }
 
@@ -411,24 +422,31 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case IDENTIFICADOR:
       jj_consume_token(IDENTIFICADOR);
+      Ações.acao15(this);
       break;
     case CONSTANTES_INT:
       jj_consume_token(CONSTANTES_INT);
+      Ações.acao16(this);
       break;
     case CONSTANTES_FLOAT:
       jj_consume_token(CONSTANTES_FLOAT);
+      Ações.acao17(this);
       break;
     case CONSTANTE_LITARAL_ASPAS:
       jj_consume_token(CONSTANTE_LITARAL_ASPAS);
+      Ações.acao18(this);
       break;
     case CONSTANTE_LITARAL_APOSTROFO:
       jj_consume_token(CONSTANTE_LITARAL_APOSTROFO);
+      Ações.acao18(this);
       break;
     case TRUE:
       jj_consume_token(TRUE);
+      Ações.acao19(this);
       break;
     case FALSE:
       jj_consume_token(FALSE);
+      Ações.acao20(this);
       break;
     default:
       jj_la1[12] = jj_gen;
@@ -440,16 +458,19 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
   final public void Selecao() throws ParseException {
     jj_consume_token(IF);
     Expressao();
+    Ações.acao21(this);
     jj_consume_token(THEN);
     ListaComandos();
     Senao();
     jj_consume_token(END);
+    Ações.acao22(this);
   }
 
   final public void Senao() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case ELSE:
       jj_consume_token(ELSE);
+      Ações.acao23(this);
       ListaComandos();
       break;
     default:
@@ -460,10 +481,13 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
 
   final public void Repeticao() throws ParseException {
     jj_consume_token(WHILE);
+    Ações.acao24(this);
     Expressao();
+    Ações.acao25(this);
     jj_consume_token(DO);
     ListaComandos();
     jj_consume_token(END);
+    Ações.acao26(this);
   }
 
   final public void Expressao() throws ParseException {
@@ -483,26 +507,32 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
       case IGUAL:
         jj_consume_token(IGUAL);
         ExpressaoAritLog();
+        Ações.acao27(this);
         break;
       case DIFERENTE:
         jj_consume_token(DIFERENTE);
         ExpressaoAritLog();
+        Ações.acao28(this);
         break;
       case MENOR:
         jj_consume_token(MENOR);
         ExpressaoAritLog();
+        Ações.acao29(this);
         break;
       case MAIOR:
         jj_consume_token(MAIOR);
         ExpressaoAritLog();
+        Ações.acao30(this);
         break;
       case MAIOR_IGUAL:
         jj_consume_token(MAIOR_IGUAL);
         ExpressaoAritLog();
+        Ações.acao32(this);
         break;
       case MENOR_IGUAL:
         jj_consume_token(MENOR_IGUAL);
         ExpressaoAritLog();
+        Ações.acao31(this);
         break;
       default:
         jj_la1[14] = jj_gen;
@@ -530,16 +560,19 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
       case MAIS:
         jj_consume_token(MAIS);
         Termo2();
+        Ações.acao33(this);
         MenorPri();
         break;
       case MENOS:
         jj_consume_token(MENOS);
         Termo2();
+        Ações.acao34(this);
         MenorPri();
         break;
       case BARRA_VERTICAL:
         jj_consume_token(BARRA_VERTICAL);
         Termo2();
+        Ações.acao35(this);
         MenorPri();
         break;
       default:
@@ -570,26 +603,31 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
       case MULTIPLICACAO:
         jj_consume_token(MULTIPLICACAO);
         Termo();
+        Ações.acao36(this);
         MediaPri();
         break;
       case DIVISAO:
         jj_consume_token(DIVISAO);
         Termo();
+        Ações.acao37(this);
         MediaPri();
         break;
       case DIVISAO_INTEIRA:
         jj_consume_token(DIVISAO_INTEIRA);
         Termo();
+        Ações.acao38(this);
         MediaPri();
         break;
       case RESTO_DIVISAO_INTEIRA:
         jj_consume_token(RESTO_DIVISAO_INTEIRA);
         Termo();
+        Ações.acao39(this);
         MediaPri();
         break;
       case E_COMERCIAL:
         jj_consume_token(E_COMERCIAL);
         Termo();
+        Ações.acao40(this);
         MediaPri();
         break;
       default:
@@ -614,6 +652,7 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     case EXPONENCIAL:
       jj_consume_token(EXPONENCIAL);
       Elemento();
+      Ações.acao41(this);
       MaiorPri();
       break;
     default:
@@ -626,24 +665,31 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case IDENTIFICADOR:
       jj_consume_token(IDENTIFICADOR);
+      Ações.acao15(this);
       break;
     case CONSTANTE_LITARAL_APOSTROFO:
       jj_consume_token(CONSTANTE_LITARAL_APOSTROFO);
+      Ações.acao18(this);
       break;
     case CONSTANTE_LITARAL_ASPAS:
       jj_consume_token(CONSTANTE_LITARAL_ASPAS);
+      Ações.acao18(this);
       break;
     case CONSTANTES_INT:
       jj_consume_token(CONSTANTES_INT);
+      Ações.acao16(this);
       break;
     case CONSTANTES_FLOAT:
       jj_consume_token(CONSTANTES_FLOAT);
+      Ações.acao17(this);
       break;
     case TRUE:
       jj_consume_token(TRUE);
+      Ações.acao19(this);
       break;
     case FALSE:
       jj_consume_token(FALSE);
+      Ações.acao20(this);
       break;
     case ABRE_PARENTESES:
       jj_consume_token(ABRE_PARENTESES);
@@ -655,6 +701,7 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
       jj_consume_token(ABRE_PARENTESES);
       Expressao();
       jj_consume_token(FECHA_PARENTESES);
+      Ações.acao42(this);
       break;
     default:
       jj_la1[21] = jj_gen;
@@ -668,6 +715,7 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
   SimpleCharStream jj_input_stream;
   /** Current token. */
   public Token token;
+
   public String getCurrentTokenImage() {
     return tokenImage[0];
   }
