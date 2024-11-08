@@ -9,6 +9,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>22</maven.compiler.source>
         <maven.compiler.target>22</maven.compiler.target>
-        <exec.mainClass>com.mycompany.trabalho_analisador_sintatico_artur_pedro_ryudi.Trabalho_Analisador_Sintatico_Artur_Pedro_Ryudi</exec.mainClass>
+        <exec.mainClass>com.mycompany.trabalho_analisador_sintatico_artur_pedro_ryudi.Trabalho_Analisador_Sintatico_Artur_Pedro_Ryudi.Tela2</exec.mainClass>
     </properties>
 </project>
