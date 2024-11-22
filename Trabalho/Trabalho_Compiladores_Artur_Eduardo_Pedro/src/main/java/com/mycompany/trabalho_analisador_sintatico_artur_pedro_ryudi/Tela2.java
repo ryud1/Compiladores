@@ -92,8 +92,7 @@
          ContadorLC = new javax.swing.JLabel();
          nomeArquivo = new javax.swing.JLabel();
          botaoCompilar = new javax.swing.JButton();
-         Icon icon2 = new ImageIcon("./src/main/java/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/PLAY.png");
-         botaoExecutar = new JButton(icon2);
+         botaoExecutar = new javax.swing.JButton();
          botaoIconSalvar = new javax.swing.JButton();
          botaoIconCortar = new javax.swing.JButton();
          botaoIconCopiar = new javax.swing.JButton();
@@ -177,7 +176,7 @@
                  botaoCompilarActionPerformed(evt);
              }
          });
-         botaoExecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/play.png"))); // NOI18N
+         botaoExecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/PLAY.png"))); // NOI18N
          botaoExecutar.setToolTipText("Executar");
          botaoExecutar.setAlignmentY(0.0F);
          botaoExecutar.setMargin(new java.awt.Insets(2, 0, 3, 0));
@@ -530,6 +529,7 @@
                      for(Instrucao i:analisadorSemantico.getAreaInstrucoes()){
                          telaCodigoIntermediario.addRow(Integer.toString(i.getNumero()), i.getCodigo(), i.getParam());
                      }
+                     terminal.setText("Compilado com sucesso!");
                  }
                  analisadorSintatico.limpaListaErros();
              }
@@ -1046,6 +1046,7 @@
  
          /* Create and display the form */
          java.awt.EventQueue.invokeLater(new Runnable() {
+             @Override
              public void run() {
                  new Tela2().setVisible(true);
              }
