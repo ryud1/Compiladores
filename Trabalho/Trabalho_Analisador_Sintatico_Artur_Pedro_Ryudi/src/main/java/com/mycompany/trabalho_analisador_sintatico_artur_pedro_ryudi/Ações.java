@@ -52,6 +52,7 @@ public class Ações {
                     throw new ParseException();
                 }
                 as.addAreaInstrucoes(as.getPonteiro(), "LDI",as.getCurrentTokenImage());
+                as.setPonteiro(as.getPonteiro()+1);
                 break;
             case 6:
                 try{
@@ -61,11 +62,13 @@ public class Ações {
                     throw new ParseException();
                 }
                 as.addAreaInstrucoes(as.getPonteiro(), "LDR", as.getCurrentTokenImage());
+                as.setPonteiro(as.getPonteiro()+1);
                 break;
             case 7:
                 if((as.getCurrentTokenImage().substring(0, 1).equals("\"") && as.getCurrentTokenImage().substring(as.getCurrentTokenImage().length()-1, as.getCurrentTokenImage().length()).equals("\"")) 
                         || (as.getCurrentTokenImage().substring(0, 1).equals("'") && as.getCurrentTokenImage().substring(as.getCurrentTokenImage().length()-1, as.getCurrentTokenImage().length()).equals("'"))){
                     as.addAreaInstrucoes(as.getPonteiro(), "LDS", as.getCurrentTokenImage());
+                    as.setPonteiro(as.getPonteiro()+1);
                     break;
                 }else{
                     as.setErroSemantico("erro semântico na linha "+  as.token.beginLine +", coluna "+ as.token.beginColumn +": Tipo invalido para atribuição de constante");
