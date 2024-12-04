@@ -49,6 +49,13 @@
  
      private String pathSaved = "./";
  
+     private String returnTerminal;
+
+     public void setReturnTerminal(String text){
+        this.returnTerminal = text;
+        terminal.append("\n\nResposta: " + text);
+     }
+
      public String getPathSaved(){
          return this.pathSaved;
      }
@@ -453,9 +460,8 @@
          }
      }//GEN-LAST:event_botaoNovoActionPerformed
  
-     private void botaoCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCompilarActionPerformed
- 
-         StringReader reader = new StringReader(painelEditavel.getText());
+     private void compilaFunction(){
+        StringReader reader = new StringReader(painelEditavel.getText());
          if (this.analisadorLexico == null) {
              this.analisadorLexico = new Analisador_lexico(reader);
          } else {
@@ -535,10 +541,15 @@
              }
          }
          analisadorLexico.limpaArrays();
+     }
+
+     private void botaoCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCompilarActionPerformed
+        compilaFunction();
      }//GEN-LAST:event_botaoCompilarActionPerformed
  
      private void botaoExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExecutarActionPerformed
-         // TODO add your handling code here:
+        compilaFunction();
+        executaFunction();
      }//GEN-LAST:event_botaoExecutarActionPerformed
  
      private void botaoAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAbrirActionPerformed
@@ -722,91 +733,18 @@
  
      
      private void botaoMenuCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuCompilarActionPerformed
-         StringReader reader = new StringReader(painelEditavel.getText());
-         if (this.analisadorLexico == null) {
-             this.analisadorLexico = new Analisador_lexico(reader);
-         } else {
-             analisadorLexico.ReInit(reader);
-         }
-         try {
-             resultado = analisadorLexico.Analisador_lexico();
-         } catch (ParseException e) {
-             throw new RuntimeException(e);
-         }
-         terminal.setText("");
-         int qtdErros = analisadorLexico.getSizeLinhasErro();
-         if (qtdErros > 0) {
-             telaCodigoIntermediario.setVisible(false);
-             if (qtdErros == 1) {
-                 terminal.append("Não foi executado pois ocorreu um erro lexico.\n");
-             } else {
-                 terminal.append("Não foi executado pois ocorreram " + analisadorLexico.getSizeLinhasErro() + " erros lexicos.\n");
-             }
-             for (int i = 0; i < analisadorLexico.getSizeLinhasErro(); i++) {
-                 terminal.append("Erro lexico na linha: " + analisadorLexico.getLinhasErro(i) + " | coluna: " + analisadorLexico.getColunasErro(i) + " - " + analisadorLexico.getTokensErro(i) + "\n");
-             }
-         } else if (painelEditavel.getText().equals("")) {
-             terminal.append("Nada a compilar.");
-         } else {
-             StringReader reader2 = new StringReader(painelEditavel.getText());
-             if (this.analisadorSintatico == null) {
-                 this.analisadorSintatico = new Analisador_sintatico(reader2);
-             } else {
-                 analisadorSintatico.ReInit(reader2);
-             }
-             analisadorSintatico.Analisador_sintatico();
-             if(analisadorSintatico.getSizeListaErros() == 1){
-                 telaCodigoIntermediario.setVisible(false);
-                 terminal.append("Não foi executado pois ocorreu um erro sintático:\n\n");
-                 for(String str :analisadorSintatico.getListaErros()){
-                     terminal.append(str);
-                 }
-                 analisadorSintatico.limpaListaErros();
-             }
-             else
-             if(analisadorSintatico.getSizeListaErros() > 1){
-                 telaCodigoIntermediario.setVisible(false);
-                 terminal.append("Não foi executado pois ocorreram " + analisadorSintatico.getSizeListaErros() + " erros sintáticos:\n\n");
-                 for(String str :analisadorSintatico.getListaErros()){
-                     terminal.append(str);
-                 }
-                 analisadorSintatico.limpaListaErros();
-             }
-             else{
-                 StringReader reader3 = new StringReader(painelEditavel.getText());
-                 if(analisadorSemantico != null){
-                     analisadorSemantico.resetAreaInstrucoes();
-                     analisadorSemantico = null;
-                     this.analisadorSemantico = new Analisador_semantico(reader3);
-                 }
-                 if (this.analisadorSemantico == null) {
-                     this.analisadorSemantico = new Analisador_semantico(reader3);
-                 } else {
-                     analisadorSintatico.ReInit(reader2);
-                 }
-                 analisadorSemantico.Analisador_semantico();
-                 if(!analisadorSemantico.getErroSemantico().equals("")){
-                     terminal.append("Não foi executado pois ocorreu um "+analisadorSemantico.getErroSemantico());
-                     analisadorSemantico.setErroSemantico("");
-                 }else{
-                     if(telaCodigoIntermediario != null){
-                         this.telaCodigoIntermediario.removeAllRows();
-                     }
-                     telaCodigoIntermediario.setVisible(true);
-                     for(Instrucao i:analisadorSemantico.getAreaInstrucoes()){
-                         telaCodigoIntermediario.addRow(Integer.toString(i.getNumero()), i.getCodigo(), i.getParam());
-                     }
-                 }
-                 analisadorSintatico.limpaListaErros();
-             }
-         }
-         analisadorLexico.limpaArrays();
+         compilaFunction();
      }//GEN-LAST:event_botaoMenuCompilarActionPerformed
  
      private void botaoMenuExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuExecutarActionPerformed
-         // TODO add your handling code here:
+        executaFunction();
      }//GEN-LAST:event_botaoMenuExecutarActionPerformed
  
+
+    private void executaFunction(){
+        Terminal terminal = new Terminal(this);
+        terminal.setVisible(true);
+    }
      private void painelEditavelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelEditavelMouseClicked
          Caret pointer = painelEditavel.getCaret();
          String linhaCount = "";
