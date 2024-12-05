@@ -24,11 +24,14 @@ public class Terminal extends javax.swing.JFrame {
         terminalText.setForeground(Color.GREEN);
         terminalText.setBackground(Color.BLACK);
         textoFixoSize = terminalText.getText().length();
-        terminalText.setNavigationFilter(new NavigationFilterPrefix(textoFixoSize,terminalText));
     }
 
     private Tela2 pai;
     private int textoFixoSize;
+
+    public void askInput(){
+        terminalText.setNavigationFilter(new NavigationFilterPrefix(textoFixoSize,terminalText));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

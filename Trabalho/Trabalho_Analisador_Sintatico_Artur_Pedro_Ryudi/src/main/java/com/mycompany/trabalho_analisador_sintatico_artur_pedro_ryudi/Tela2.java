@@ -58,7 +58,7 @@ import java.util.ArrayList;
      
      private int ponteiroExec = 1, topoExec = 0;
 
-     private String returnTerminal;
+     private String returnTerminal = "";
 
 
      public void setReturnTerminal(String text){
