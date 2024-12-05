@@ -6,11 +6,13 @@
  package com.mycompany.trabalho_analisador_sintatico_artur_pedro_ryudi;
 
  import javax.swing.*;
+
  import java.awt.*;
  import java.awt.event.WindowAdapter;
  import java.awt.event.WindowEvent;
  import java.awt.geom.Rectangle2D;
  import java.io.*;
+import java.util.ArrayList;
  import java.util.logging.Level;
  import java.util.logging.Logger;
  
@@ -49,7 +51,13 @@
  
      private String pathSaved = "./";
  
+
+     private ArrayList<String> filaExec = new ArrayList<>();
+     
+     private int ponteiroExec, topoExec;
+
      private String returnTerminal;
+
 
      public void setReturnTerminal(String text){
         this.returnTerminal = text;
@@ -460,7 +468,7 @@
          }
      }//GEN-LAST:event_botaoNovoActionPerformed
  
-     private void compilaFunction(){
+     private boolean compilaFunction(){
         StringReader reader = new StringReader(painelEditavel.getText());
          if (this.analisadorLexico == null) {
              this.analisadorLexico = new Analisador_lexico(reader);
@@ -536,11 +544,13 @@
                          telaCodigoIntermediario.addRow(Integer.toString(i.getNumero()), i.getCodigo(), i.getParam());
                      }
                      terminal.setText("Compilado com sucesso!");
+                     return true;
                  }
                  analisadorSintatico.limpaListaErros();
              }
          }
          analisadorLexico.limpaArrays();
+         return false;
      }
 
      private void botaoCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCompilarActionPerformed
@@ -548,8 +558,8 @@
      }//GEN-LAST:event_botaoCompilarActionPerformed
  
      private void botaoExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExecutarActionPerformed
-        compilaFunction();
-        executaFunction();
+        if(compilaFunction())
+            executaFunction();
      }//GEN-LAST:event_botaoExecutarActionPerformed
  
      private void botaoAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAbrirActionPerformed
@@ -733,11 +743,12 @@
  
      
      private void botaoMenuCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuCompilarActionPerformed
-         compilaFunction();
+        compilaFunction();
      }//GEN-LAST:event_botaoMenuCompilarActionPerformed
  
      private void botaoMenuExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuExecutarActionPerformed
-        executaFunction();
+        if(compilaFunction())
+            executaFunction();
      }//GEN-LAST:event_botaoMenuExecutarActionPerformed
  
 
