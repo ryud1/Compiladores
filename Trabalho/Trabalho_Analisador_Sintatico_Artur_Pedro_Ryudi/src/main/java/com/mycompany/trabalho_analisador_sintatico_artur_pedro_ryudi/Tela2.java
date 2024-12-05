@@ -52,11 +52,11 @@ import java.util.ArrayList;
      private String pathSaved = "./";
  
 
-     private ArrayList<String> filaExec = new ArrayList<>();
+     private ArrayList<String> pilhaExec = new ArrayList<>();
 
-     private ArrayList<Integer> listaVar = new ArrayList<>();
+     private ArrayList<Integer> pilhaTipos = new ArrayList<>();
      
-     private int ponteiroExec, topoExec;
+     private int ponteiroExec = 1, topoExec = 0;
 
      private String returnTerminal;
 
@@ -1036,4 +1036,32 @@ import java.util.ArrayList;
      private javax.swing.JTextArea painelEditavel;
      private javax.swing.JTextArea terminal;
      // End of variables declaration//GEN-END:variables
+
+    public ArrayList<String> getPilhaExec() {
+        return pilhaExec;
+    }
+
+    public ArrayList<Integer> getPilhaTipos() {
+        return pilhaTipos;
+    } 
+
+    public int getPonteiroExec() {
+        return ponteiroExec;
+    }
+
+    public int getTopoExec() {
+        return topoExec;
+    }
+
+    public String getReturnTerminal() {
+        return returnTerminal;
+    }
+
+    public void setPonteiroExec(int ponteiroExec) {
+        this.ponteiroExec = ponteiroExec;
+    }
+
+    public void setTopoExec(int topoExec) {
+        this.topoExec = topoExec;
+    }
  }
