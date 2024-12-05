@@ -53,6 +53,8 @@ import java.util.ArrayList;
  
 
      private ArrayList<String> filaExec = new ArrayList<>();
+
+     private ArrayList<Integer> listaVar = new ArrayList<>();
      
      private int ponteiroExec, topoExec;
 
