@@ -64,7 +64,7 @@ import javax.swing.text.Caret;
 
      private String returnTerminal = "";
 
-     private int checkpintRea, checkpointTipRea;
+     private int checkpintRea = -1, checkpointTipRea;
 
      public void setReturnTerminal(String text){
         this.returnTerminal = text;
@@ -170,6 +170,9 @@ import javax.swing.text.Caret;
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 painelEditavelKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                painelEditavelKeyTyped(evt);
+            }
         });
         jScrollPane1.setViewportView(painelEditavel);
 
@@ -209,7 +212,7 @@ import javax.swing.text.Caret;
             }
         });
 
-        botaoExecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/Play.png"))); // NOI18N
+        botaoExecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/PLAY.png"))); // NOI18N
         botaoExecutar.setToolTipText("Executar");
         botaoExecutar.setAlignmentY(0.0F);
         botaoExecutar.setMargin(new java.awt.Insets(2, 0, 3, 0));
@@ -279,7 +282,7 @@ import javax.swing.text.Caret;
             }
         });
 
-        createTerminal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/terminal (1).png"))); // NOI18N
+        createTerminal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/trabalho_analisador_sintatico_artur_pedro_ryudi/Images/terminal(1).png"))); // NOI18N
         createTerminal.setPreferredSize(new java.awt.Dimension(32, 32));
         createTerminal.setRequestFocusEnabled(false);
         createTerminal.addActionListener(new java.awt.event.ActionListener() {
@@ -297,10 +300,6 @@ import javax.swing.text.Caret;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ContadorLC, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(botaoIconNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -321,7 +320,11 @@ import javax.swing.text.Caret;
                         .addComponent(botaoIconBoia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(createTerminal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ContadorLC, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nomeArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -795,14 +798,18 @@ import javax.swing.text.Caret;
      }                                                  
  
 
-    private void executaFunction(){
-        pilhaExec.clear();
-        pilhaTipos.clear();
-        terminalExec.clear();
-        terminalExec.requestFocus();
-        topoExec = 0;
-        ponteiroExec = 1;
+    public void executaFunction(){
+        Instrucoes.setErroSemantico("");
         boolean continua = true;
+        boolean sairFuncao = false;
+        if(checkpintRea == -1){
+            pilhaExec.clear();
+            pilhaTipos.clear();
+            terminalExec.clear();
+            terminalExec.requestFocus();
+            topoExec = 0;
+            ponteiroExec = 1;
+        }
         while(continua){
             if(Instrucoes.getErroSemantico().equals("")){
                 switch(codigoIntermediario.get(ponteiroExec-1).getCodigo()){
@@ -874,6 +881,7 @@ import javax.swing.text.Caret;
                     break;
                     case "REA":
                     Instrucoes.rea(this,terminalExec,Integer.parseInt(codigoIntermediario.get(ponteiroExec-1).getParam()));
+                    sairFuncao = true;
                     break;
                     case "SME":
                     Instrucoes.sme(this);
@@ -898,9 +906,11 @@ import javax.swing.text.Caret;
                     this.terminal.append("\nExecutado com sucesso!");
                     break;
                 }
-                if(codigoIntermediario.get(ponteiroExec-1).getCodigo() == "REA")
+                if(sairFuncao){
                     break;
+                }
             }else{
+                terminal.append("\n"+Instrucoes.getErroSemantico());
                 break;
             }
         }
@@ -1123,6 +1133,23 @@ import javax.swing.text.Caret;
     private void createTerminalMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createTerminalMenuActionPerformed
         createTerminal();
     }//GEN-LAST:event_createTerminalMenuActionPerformed
+
+    private void painelEditavelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_painelEditavelKeyTyped
+        Caret pointer = painelEditavel.getCaret();
+        String linhaCount = "";
+        if (pointer.getMagicCaretPosition() != null) {
+            String contador = "Linha: "
+                    + (((pointer.getMagicCaretPosition().y) / 25) + 1)
+                    + " | Coluna: "
+                    + (((pointer.getMagicCaretPosition().x) / 11) + 1);
+            ContadorLC.setText(contador);
+            for(int i = 0;i<painelEditavel.getLineCount();i++){
+                linhaCount += i+1 + "\n";
+            }
+        }
+        selectPainelEditavel = painelEditavel.getSelectedText();
+        painelEditavel.requestFocus();
+    }//GEN-LAST:event_painelEditavelKeyTyped
  
      /**
       * @param args the command line arguments
@@ -1227,15 +1254,15 @@ import javax.swing.text.Caret;
         return checkpintRea;
     }
 
-    public void setCheckpintRea(int checkpintRea) {
-        this.checkpintRea = checkpintRea;
+    public void setCheckpintRea(int i) {
+        this.checkpintRea = i;
     }
 
     public int getCheckpointTipRea() {
         return checkpointTipRea;
     }
 
-    public void setCheckpointTipRea(int checkpointTipRea) {
-        this.checkpointTipRea = checkpointTipRea;
+    public void setCheckpointTipRea(int i) {
+        this.checkpointTipRea = i;
     }
  }

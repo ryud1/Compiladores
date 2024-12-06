@@ -6,7 +6,6 @@ package com.mycompany.trabalho_analisador_sintatico_artur_pedro_ryudi;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.text.BreakIterator;
 
 /**
  *
@@ -46,39 +45,6 @@ public class Terminal extends javax.swing.JFrame {
 
     public void clear(){
         terminalText.setText("");
-    }
-
-    public boolean validaInt(){
-        if(pai.getReturnTerminal().length() > 3)
-            return false;
-        for (int i = 0; i < pai.getReturnTerminal().length(); i++) {
-            if (!Character.isDigit(pai.getReturnTerminal().charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean validaFloat(){
-        int count = 0;
-        if(pai.getReturnTerminal().length() > 7)
-            return false;
-        String[] partes = pai.getReturnTerminal().split("\\.");
-        if (partes.length > 2 || partes.length == 1) 
-            return false;
-        if(partes[0].length() > 4)
-            return false;
-        if(partes[1].length() > 2)
-            return false;
-        return true;
-    }
-
-    public boolean validaBool(){
-        if(pai.getReturnTerminal().toUpperCase() == "FALSE")
-            return true;
-        if(pai.getReturnTerminal().toUpperCase() == "TRUE")
-            return true;
-        return false;
     }
 
     /**
@@ -150,22 +116,9 @@ public class Terminal extends javax.swing.JFrame {
                 terminalText.append("\n");
                 pai.requestFocus();
                 pai.setPonteiroExec(pai.getCheckpintRea());
-                switch(pai.getCheckpointTipRea()){
-                    case 1:
-                        if(!validaInt())
-                            Instrucoes.setErroSemantico("Runtime error: Tipo invalido inserido.");
-                        break;
-                    case 2:
-                        if(!validaFloat())
-                            Instrucoes.setErroSemantico("Runtime error: Tipo invalido inserido.");
-                        break;
-                    case 4:
-                        if(!validaBool())
-                            Instrucoes.setErroSemantico("Runtime error: Tipo invalido inserido.");
-                }
+                //não temos validação de tipo, não deu tempo
                 pai.setTopoExec(pai.getTopoExec()+1);
                 pai.executaFunction();
-                pai.setCheckpintRea(-1);
             }
         }
     }//GEN-LAST:event_terminalTextKeyPressed

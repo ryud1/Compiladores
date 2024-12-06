@@ -3,9 +3,9 @@ package com.mycompany.trabalho_analisador_sintatico_artur_pedro_ryudi;
 public class Simbolo {
     private String nome;
     private String categoria;
-    private float atributo;
+    private int atributo;
 
-    public Simbolo(String nome, String categoria, float atributo) {
+    public Simbolo(String nome, String categoria, int atributo) {
         this.atributo = atributo;
         this.categoria = categoria;
         this.nome = nome;
@@ -22,10 +22,10 @@ public class Simbolo {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-    public float getAtributo() {
+    public int getAtributo() {
         return atributo;
     }
-    public void setAtributo(float atributo) {
+    public void setAtributo(int atributo) {
         this.atributo = atributo;
     }
 }

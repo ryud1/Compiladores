@@ -111,7 +111,7 @@ public class Analisador_semantico implements Analisador_sintaticoConstants {
     return null; // erro
   }
 
-  public void addtabelaSimbolos(String nome, String categoria,float atributo){
+  public void addtabelaSimbolos(String nome, String categoria,int atributo){
     TabelaSimbolos.add(new Simbolo(nome,categoria,atributo));
   }
 

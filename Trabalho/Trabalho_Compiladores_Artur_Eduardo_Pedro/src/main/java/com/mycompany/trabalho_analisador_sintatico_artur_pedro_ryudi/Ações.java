@@ -52,6 +52,7 @@ public class Ações {
                     throw new ParseException();
                 }
                 as.addAreaInstrucoes(as.getPonteiro(), "LDI",as.getCurrentTokenImage());
+                as.setPonteiro(as.getPonteiro()+1);
                 break;
             case 6:
                 try{
@@ -61,11 +62,13 @@ public class Ações {
                     throw new ParseException();
                 }
                 as.addAreaInstrucoes(as.getPonteiro(), "LDR", as.getCurrentTokenImage());
+                as.setPonteiro(as.getPonteiro()+1);
                 break;
             case 7:
                 if((as.getCurrentTokenImage().substring(0, 1).equals("\"") && as.getCurrentTokenImage().substring(as.getCurrentTokenImage().length()-1, as.getCurrentTokenImage().length()).equals("\"")) 
                         || (as.getCurrentTokenImage().substring(0, 1).equals("'") && as.getCurrentTokenImage().substring(as.getCurrentTokenImage().length()-1, as.getCurrentTokenImage().length()).equals("'"))){
                     as.addAreaInstrucoes(as.getPonteiro(), "LDS", as.getCurrentTokenImage());
+                    as.setPonteiro(as.getPonteiro()+1);
                     break;
                 }else{
                     as.setErroSemantico("erro semântico na linha "+  as.token.beginLine +", coluna "+ as.token.beginColumn +": Tipo invalido para atribuição de constante");
@@ -138,7 +141,7 @@ public class Ações {
                     ||as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getCategoria().equals("4")){
                         as.addAreaInstrucoes(as.getPonteiro(), "REA", as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getCategoria());
                         as.setPonteiro(as.getPonteiro()+1);
-                        as.addAreaInstrucoes(as.getPonteiro(), "STR",Float.toString(as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getAtributo()));
+                        as.addAreaInstrucoes(as.getPonteiro(), "STR",Integer.toString(as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getAtributo()));
                         as.setPonteiro(as.getPonteiro()+1);
                     }else{
                         //erro:  “identificador de programa ou de constante”
@@ -160,7 +163,7 @@ public class Ações {
             ||as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getCategoria().equals("2")
             ||as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getCategoria().equals("3")
             ||as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getCategoria().equals("4")){
-                as.addAreaInstrucoes(as.getPonteiro(), "STR",Float.toString(as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getAtributo()));
+                as.addAreaInstrucoes(as.getPonteiro(), "STR",Integer.toString(as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getAtributo()));
                 as.setPonteiro(as.getPonteiro()+1);
             }else{
                 //erro:  “identificador de programa ou de constante”
@@ -189,7 +192,7 @@ public class Ações {
         if(as.existTabelaSimbolos(as.getCurrentTokenImage())){
             if(!as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getCategoria().equals("0")){
                 Simbolo curToken = as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage());
-                as.addAreaInstrucoes(as.getPonteiro(), "LDV", Float.toString(curToken.getAtributo()));
+                as.addAreaInstrucoes(as.getPonteiro(), "LDV", Integer.toString(curToken.getAtributo()));
                 as.setPonteiro(as.getPonteiro()+1);
             }else{
                 //erro: "identificador de programa"
@@ -257,7 +260,7 @@ public class Ações {
     }
     public static void acao26(Analisador_semantico as){
         int dado25 = as.desempilharPilhaDesvios();
-        as.getInstrucaoAreaInstrucoes(dado25).setParam(Integer.toString(as.getPonteiro()));
+        as.getInstrucaoAreaInstrucoes(dado25).setParam(Integer.toString(as.getPonteiro()+1));
         int dado24 = as.desempilharPilhaDesvios();
         as.addAreaInstrucoes(as.getPonteiro(), "JMP",Integer.toString(dado24));
         as.setPonteiro(as.getPonteiro()+1);
@@ -279,11 +282,11 @@ public class Ações {
         as.setPonteiro(as.getPonteiro()+1);
     }
     public static void acao31(Analisador_semantico as){
-        as.addAreaInstrucoes(as.getPonteiro(), "MEI", "0");
+        as.addAreaInstrucoes(as.getPonteiro(), "SME", "0");
         as.setPonteiro(as.getPonteiro()+1);
     }
     public static void acao32(Analisador_semantico as){
-        as.addAreaInstrucoes(as.getPonteiro(), "MAI", "0");
+        as.addAreaInstrucoes(as.getPonteiro(), "BGE", "0");
         as.setPonteiro(as.getPonteiro()+1);
     }
     public static void acao33(Analisador_semantico as){

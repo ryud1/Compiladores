@@ -147,7 +147,7 @@ public class Instrucoes {
                     erroSemantico = "Runtime error: divisão por 0";
                 }
                 if(t.getPilhaTipos().get(t.getTopoExec()-1) == 1){
-                    t.getPilhaExec().set(t.getTopoExec()-2,Integer.toString(Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-2)) + Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-1))));
+                    t.getPilhaExec().set(t.getTopoExec()-1,Integer.toString(Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-2)) + Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-1))));
                 }else{
                     t.getPilhaExec().set(t.getTopoExec()-1,Float.toString(Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-2)) + Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-1))));
                 }
@@ -228,7 +228,7 @@ public class Instrucoes {
     public static void mul(Tela2 t) {
         if((t.getPilhaTipos().get(t.getTopoExec()-2) == 1 && t.getPilhaTipos().get(t.getTopoExec()-1) == 1) || (t.getPilhaTipos().get(t.getTopoExec()-2) == 2 && t.getPilhaTipos().get(t.getTopoExec()-1) == 2)){
             if(t.getPilhaTipos().get(t.getTopoExec()-1) == 1){
-                t.getPilhaExec().set(t.getTopoExec()-2,Integer.toString(Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-2)) * Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-1))));
+                t.getPilhaExec().set(t.getTopoExec()-1,Integer.toString(Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-2)) * Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-1))));
             }else{
                 t.getPilhaExec().set(t.getTopoExec()-1,Float.toString(Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-2)) * Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-1))));
             }
@@ -307,7 +307,7 @@ public class Instrucoes {
     public static void sub(Tela2 t){
         if((t.getPilhaTipos().get(t.getTopoExec()-2) == 1 && t.getPilhaTipos().get(t.getTopoExec()-1) == 1) || (t.getPilhaTipos().get(t.getTopoExec()-2) == 2 && t.getPilhaTipos().get(t.getTopoExec()-1) == 2)){
             if(t.getPilhaTipos().get(t.getTopoExec()-1) == 1){
-                t.getPilhaExec().set(t.getTopoExec()-2,Integer.toString(Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-2)) - Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-1))));
+                t.getPilhaExec().set(t.getTopoExec()-1,Integer.toString(Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-2)) - Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-1))));
             }else{
                 t.getPilhaExec().set(t.getTopoExec()-1,Float.toString(Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-2)) - Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-1))));
             }
