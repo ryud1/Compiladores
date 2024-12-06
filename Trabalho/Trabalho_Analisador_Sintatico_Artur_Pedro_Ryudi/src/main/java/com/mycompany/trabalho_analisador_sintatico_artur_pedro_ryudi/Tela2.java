@@ -103,6 +103,10 @@ import javax.swing.text.Caret;
         terminalExec.setVisible(true);
         terminalExec.requestFocus();
      }
+
+     public javax.swing.JTextArea getTerminal(){
+        return terminal;
+     }
  
      /**
       * This method is called from within the constructor to initialize the form.

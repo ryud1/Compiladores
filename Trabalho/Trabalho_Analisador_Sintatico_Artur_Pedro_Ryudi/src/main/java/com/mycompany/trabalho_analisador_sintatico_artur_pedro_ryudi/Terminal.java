@@ -163,9 +163,13 @@ public class Terminal extends javax.swing.JFrame {
                         if(!validaBool())
                             Instrucoes.setErroSemantico("Runtime error: Tipo invalido inserido.");
                 }
-                pai.setTopoExec(pai.getTopoExec()+1);
-                pai.executaFunction();
-                pai.setCheckpintRea(-1);
+                if(Instrucoes.getErroSemantico().equals("")){
+                    pai.setTopoExec(pai.getTopoExec()+1);
+                    pai.executaFunction();
+                    pai.setCheckpintRea(-1);
+                }else{
+                    pai.getTerminal().append(("\n"+ Instrucoes.getErroSemantico()));
+                }
             }
         }
     }//GEN-LAST:event_terminalTextKeyPressed

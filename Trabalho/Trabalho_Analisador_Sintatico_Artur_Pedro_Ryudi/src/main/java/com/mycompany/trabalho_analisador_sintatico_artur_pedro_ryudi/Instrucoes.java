@@ -300,7 +300,7 @@ public class Instrucoes {
             t.getPilhaTipos().removeLast();
             t.setPonteiroExec(t.getPonteiroExec() + 1);
         } else {
-            erroSemantico = "Não foi executado pois ocorreu um erro semântico ao tentar salvar uma valor em uma variável de tipo incoerente.";
+            erroSemantico = "Não foi executado pois ocorreu um erro semântico ao tentar salvar um valor em uma variável de tipo incoerente.";
         }
     }
 
