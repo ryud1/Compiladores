@@ -149,7 +149,7 @@ public class Instrucoes {
                 if(t.getPilhaTipos().get(t.getTopoExec()-1) == 1){
                     t.getPilhaExec().set(t.getTopoExec()-2,Integer.toString(Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-2)) + Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-1))));
                 }else{
-                    t.getPilhaExec().set(t.getTopoExec()-1,Float.toString(Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-2)) + Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-1))));
+                    t.getPilhaExec().set(t.getTopoExec()-2,Float.toString(Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-2)) + Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-1))));
                 }
                 t.setTopoExec(t.getTopoExec()-1);
                 t.getPilhaExec().removeLast();
@@ -157,7 +157,7 @@ public class Instrucoes {
                 t.setPonteiroExec(t.getPonteiroExec()+1);
             }
             else{
-                erroSemantico = "Não foi executado pois ocorreu um erro semântico ao tentar somar duas variaveis e/ou constantes de tipos diferentes ou incorretas.";
+                erroSemantico = "Não foi executado pois ocorreu um erro semântico ao tentar dividir duas variaveis e/ou constantes de tipos diferentes ou incorretas.";
             }
 }
 
@@ -230,7 +230,7 @@ public class Instrucoes {
             if(t.getPilhaTipos().get(t.getTopoExec()-1) == 1){
                 t.getPilhaExec().set(t.getTopoExec()-2,Integer.toString(Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-2)) * Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-1))));
             }else{
-                t.getPilhaExec().set(t.getTopoExec()-1,Float.toString(Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-2)) * Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-1))));
+                t.getPilhaExec().set(t.getTopoExec()-2,Float.toString(Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-2)) * Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-1))));
             }
             t.setTopoExec(t.getTopoExec()-1);
             t.getPilhaExec().removeLast();
@@ -238,7 +238,7 @@ public class Instrucoes {
             t.setPonteiroExec(t.getPonteiroExec()+1);
         }
         else{
-            erroSemantico = "Não foi executado pois ocorreu um erro semântico ao tentar somar duas variaveis e/ou constantes de tipos diferentes ou incorretas.";
+            erroSemantico = "Não foi executado pois ocorreu um erro semântico ao tentar multiplicar duas variaveis e/ou constantes de tipos diferentes ou incorretas.";
         }
     }
 
@@ -309,7 +309,7 @@ public class Instrucoes {
             if(t.getPilhaTipos().get(t.getTopoExec()-1) == 1){
                 t.getPilhaExec().set(t.getTopoExec()-2,Integer.toString(Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-2)) - Integer.parseInt(t.getPilhaExec().get(t.getTopoExec()-1))));
             }else{
-                t.getPilhaExec().set(t.getTopoExec()-1,Float.toString(Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-2)) - Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-1))));
+                t.getPilhaExec().set(t.getTopoExec()-2,Float.toString(Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-2)) - Float.parseFloat(t.getPilhaExec().get(t.getTopoExec()-1))));
             }
             t.setTopoExec(t.getTopoExec()-1);
             t.getPilhaExec().removeLast();
@@ -317,7 +317,7 @@ public class Instrucoes {
             t.setPonteiroExec(t.getPonteiroExec()+1);
         }
         else{
-            erroSemantico = "Não foi executado pois ocorreu um erro semântico ao tentar somar duas variaveis e/ou constantes de tipos diferentes ou incorretas.";
+            erroSemantico = "Não foi executado pois ocorreu um erro semântico ao tentar subtrair duas variaveis e/ou constantes de tipos diferentes ou incorretas.";
         }
     }
     public static void wrt(Tela2 t, Terminal terminal){

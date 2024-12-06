@@ -605,6 +605,7 @@ import javax.swing.text.Caret;
  
      private void botaoExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExecutarActionPerformed
         if(terminalExec != null){
+            checkpintRea = -1;
             if(compilaFunction())
                 executaFunction();
         }else{
@@ -797,8 +798,13 @@ import javax.swing.text.Caret;
      }//GEN-LAST:event_botaoMenuCompilarActionPerformed
  
      private void botaoMenuExecutarActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        if(compilaFunction())
-            executaFunction();
+        if(terminalExec != null){
+            checkpintRea = -1;
+            if(compilaFunction())
+                executaFunction();
+        }else{
+            terminal.setText("Não foi possível executar pois não existe um terminal aberto!");
+        }
      }                                                  
  
 
