@@ -86,7 +86,7 @@ public class Instrucoes {
     public static void ldv(Tela2 t, Integer endereco){
         t.getPilhaExec().addLast(t.getPilhaExec().get(endereco-1));
         t.getPilhaTipos().addLast(t.getPilhaTipos().get(endereco-1));
-        t.setTopoExec(t.getTopoExec() + 1);
+        t.setTopoExec(t.getTopoExec()+1);
         t.setPonteiroExec(t.getPonteiroExec()+1);
     }
 
@@ -99,6 +99,7 @@ public class Instrucoes {
         t.setTopoExec(t.getTopoExec()-1);
         t.getPilhaExec().removeLast();
         t.getPilhaTipos().removeLast();
+
     }
 
     public static void bge(Tela2 t){
@@ -174,18 +175,14 @@ public class Instrucoes {
     }
 
     public static void jmf(Tela2 t, int endereco){
-        if(Objects.equals(t.getPilhaTipos().get(t.getTopoExec()-1), t.getPilhaTipos().get(t.getTopoExec()-2))){
-            if(t.getPilhaExec().get(t.getTopoExec()-1).equals("false")){
-                t.setPonteiroExec(endereco-1);
-            }else{
-                t.setPonteiroExec(t.getPonteiroExec()+1);
-            }
-            t.setTopoExec(t.getTopoExec()-1);
-            t.getPilhaExec().removeLast();
-            t.getPilhaTipos().removeLast();
+        if(t.getPilhaExec().get(t.getTopoExec()-1).equals("false")){
+            t.setPonteiroExec(endereco);
         }else{
-            erroSemantico = "Não foi executado pois ocorreu um erro semântico ao tentar comparar duas variaveis e/ou constantes de tipos diferentes.";
+            t.setPonteiroExec(t.getPonteiroExec()+1);
         }
+        t.setTopoExec(t.getTopoExec()-1);
+        t.getPilhaExec().removeLast();
+        t.getPilhaTipos().removeLast();
     }
 
     public static void jmp(Tela2 t, int endereco){
@@ -298,13 +295,14 @@ public class Instrucoes {
     }
 
     public static void str(Tela2 t, int endereco) {
-        if(Objects.equals(t.getPilhaTipos().get(endereco-1), t.getPilhaTipos().get(t.getTopoExec()-1))){
-            t.getPilhaExec().set(endereco - 1, t.getPilhaExec().get(t.getTopoExec()-1));
+        if (Objects.equals(t.getPilhaTipos().get(endereco - 1), t.getPilhaTipos().get(t.getTopoExec() - 1))) {
+            t.getPilhaExec().set(endereco - 1, t.getPilhaExec().get(t.getTopoExec() - 1));
+            t.getPilhaExec().set(endereco - 1, t.getPilhaExec().get(t.getTopoExec() - 1));
             t.setTopoExec(t.getTopoExec() - 1);
             t.getPilhaExec().removeLast();
             t.getPilhaTipos().removeLast();
             t.setPonteiroExec(t.getPonteiroExec() + 1);
-        }else{
+        } else {
             erroSemantico = "Não foi executado pois ocorreu um erro semântico ao tentar salvar uma valor em uma variável de tipo incoerente.";
         }
     }
@@ -327,7 +325,7 @@ public class Instrucoes {
     }
     public static void wrt(Tela2 t, Terminal terminal){
         terminal.write(t.getPilhaExec().get(t.getTopoExec()-1));
-        t.setTopoExec(t.getTopoExec() - 1);
+        t.setTopoExec(t.getTopoExec()-1);
         t.getPilhaExec().removeLast();
         t.getPilhaTipos().removeLast();
         t.setPonteiroExec(t.getPonteiroExec() + 1);

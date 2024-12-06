@@ -752,7 +752,7 @@ import java.util.ArrayList;
      private void botaoMenuExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMenuExecutarActionPerformed
         if(compilaFunction())
             executaFunction();
-     }//GEN-LAST:event_botaoMenuExecutarActionPerformed
+     }//GEN-LAST:event_botaoMenuExecutarActionPerformed;
  
 
     private void executaFunction(){
@@ -763,23 +763,24 @@ import java.util.ArrayList;
         Terminal terminal = new Terminal(this);
         terminal.setVisible(true);
         terminal.requestFocus();
-        for(int i = 0;i<=codigoIntermediario.size();i++){
+        boolean continua = true;
+        while(continua){
             if(Instrucoes.getErroSemantico().equals("")){
-                switch(codigoIntermediario.get(i).getCodigo()){
+                switch(codigoIntermediario.get(ponteiroExec-1).getCodigo()){
                     case "ADD":
                     Instrucoes.add(this);
                     break;
                     case "ALB":
-                    Instrucoes.alb(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    Instrucoes.alb(this,Integer.valueOf(codigoIntermediario.get(ponteiroExec-1).getParam()));
                     break;
                     case "ALI":
-                    Instrucoes.ali(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    Instrucoes.ali(this,Integer.valueOf(codigoIntermediario.get(ponteiroExec-1).getParam()));
                     break;
                     case "ALR":
-                    Instrucoes.alr(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    Instrucoes.alr(this,Integer.valueOf(codigoIntermediario.get(ponteiroExec-1).getParam()));
                     break;
                     case "ALS":
-                    Instrucoes.als(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    Instrucoes.als(this,Integer.valueOf(codigoIntermediario.get(ponteiroExec-1).getParam()));
                     break;
                     case "AND":
                     Instrucoes.and(this);
@@ -800,28 +801,28 @@ import java.util.ArrayList;
                     Instrucoes.eql(this);
                     break;
                     case "JMF":
-                    Instrucoes.jmf(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    Instrucoes.jmf(this,Integer.valueOf(codigoIntermediario.get(ponteiroExec-1).getParam()));
                     break;
                     case "JMP":
-                    Instrucoes.jmp(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    Instrucoes.jmp(this,Integer.parseInt(codigoIntermediario.get(ponteiroExec-1).getParam()));
                     break;
                     case "JMT":
-                    Instrucoes.jmt(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    Instrucoes.jmt(this,Integer.valueOf(codigoIntermediario.get(ponteiroExec-1).getParam()));
                     break;
                     case "LDV":
-                    Instrucoes.ldv(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    Instrucoes.ldv(this,Integer.valueOf(codigoIntermediario.get(ponteiroExec-1).getParam()));
                     break;
                     case "LDB":
-                    Instrucoes.ldb(this,codigoIntermediario.get(i).getParam());
+                    Instrucoes.ldb(this,codigoIntermediario.get(ponteiroExec-1).getParam());
                     break;
                     case "LDI":
-                    Instrucoes.ldi(this,codigoIntermediario.get(i).getParam());
+                    Instrucoes.ldi(this,codigoIntermediario.get(ponteiroExec-1).getParam());
                     break;
                     case "LDR":
-                    Instrucoes.ldr(this,codigoIntermediario.get(i).getParam());
+                    Instrucoes.ldr(this,codigoIntermediario.get(ponteiroExec-1).getParam());
                     break;
                     case "LDS":
-                    Instrucoes.lds(this,codigoIntermediario.get(i).getParam());
+                    Instrucoes.lds(this,codigoIntermediario.get(ponteiroExec-1).getParam());
                     break;
                     case "MUL":
                     Instrucoes.mul(this);
@@ -833,7 +834,7 @@ import java.util.ArrayList;
                     Instrucoes.or(this);
                     break;
                     case "REA":
-                    Instrucoes.rea(this,terminal,Integer.parseInt(codigoIntermediario.get(i).getParam()));
+                    Instrucoes.rea(this,terminal,Integer.parseInt(codigoIntermediario.get(ponteiroExec-1).getParam()));
                     break;
                     case "SME":
                     Instrucoes.sme(this);
@@ -842,7 +843,7 @@ import java.util.ArrayList;
                     Instrucoes.smr(this);
                     break;
                     case "STR":
-                    Instrucoes.str(this,Integer.parseInt(codigoIntermediario.get(i).getParam()));
+                    Instrucoes.str(this,Integer.parseInt(codigoIntermediario.get(ponteiroExec-1).getParam()));
                     break;
                     case "SUB":
                     Instrucoes.sub(this);
@@ -851,9 +852,10 @@ import java.util.ArrayList;
                     Instrucoes.wrt(this,terminal);
                     break;
                     case "STC":
-                    Instrucoes.stc(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    Instrucoes.stc(this,Integer.valueOf(codigoIntermediario.get(ponteiroExec-1).getParam()));
                     break;
                     case "STP":
+                    continua = false;
                     this.terminal.append("\nExecutado com sucesso!");
                     break;
                 }

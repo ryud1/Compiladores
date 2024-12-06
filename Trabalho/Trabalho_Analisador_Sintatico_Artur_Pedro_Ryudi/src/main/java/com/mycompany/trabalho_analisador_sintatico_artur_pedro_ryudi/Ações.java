@@ -260,7 +260,7 @@ public class Ações {
     }
     public static void acao26(Analisador_semantico as){
         int dado25 = as.desempilharPilhaDesvios();
-        as.getInstrucaoAreaInstrucoes(dado25).setParam(Integer.toString(as.getPonteiro()));
+        as.getInstrucaoAreaInstrucoes(dado25).setParam(Integer.toString(as.getPonteiro()+1));
         int dado24 = as.desempilharPilhaDesvios();
         as.addAreaInstrucoes(as.getPonteiro(), "JMP",Integer.toString(dado24));
         as.setPonteiro(as.getPonteiro()+1);
@@ -282,11 +282,11 @@ public class Ações {
         as.setPonteiro(as.getPonteiro()+1);
     }
     public static void acao31(Analisador_semantico as){
-        as.addAreaInstrucoes(as.getPonteiro(), "MEI", "0");
+        as.addAreaInstrucoes(as.getPonteiro(), "SME", "0");
         as.setPonteiro(as.getPonteiro()+1);
     }
     public static void acao32(Analisador_semantico as){
-        as.addAreaInstrucoes(as.getPonteiro(), "MAI", "0");
+        as.addAreaInstrucoes(as.getPonteiro(), "BGE", "0");
         as.setPonteiro(as.getPonteiro()+1);
     }
     public static void acao33(Analisador_semantico as){
