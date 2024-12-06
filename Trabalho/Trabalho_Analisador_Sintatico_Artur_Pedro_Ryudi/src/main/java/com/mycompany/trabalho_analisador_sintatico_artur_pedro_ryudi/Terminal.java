@@ -31,11 +31,17 @@ public class Terminal extends javax.swing.JFrame {
     private int textoFixoSize;
 
     public void askInput(){
+        terminalText.setEditable(true);
+        textoFixoSize = terminalText.getText().length();
         terminalText.setNavigationFilter(new NavigationFilterPrefix(textoFixoSize,terminalText));
     }
 
     public void write(String str){
-        terminalText.append(str);
+        terminalText.append(str + "\n");
+    }
+
+    public void clear(){
+        terminalText.setText("");
     }
 
     /**
@@ -106,9 +112,14 @@ public class Terminal extends javax.swing.JFrame {
     private void terminalTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_terminalTextKeyReleased
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             pai.setReturnTerminal(terminalText.getText().substring(textoFixoSize));
-            pai.getPilhaExec().add(pai.getTopoExec()-1,pai.getReturnTerminal());
+            pai.getPilhaExec().addLast(pai.getReturnTerminal());
             terminalText.setEditable(false);
             pai.requestFocus();
+            pai.setPonteiroExec(pai.getPonteiroExec()+1);
+            if(pai.getPilhaTipos().get(pai.getTopoExec()-2) != tipo){
+                Instrucoes.setErroSemantico("Runtime error: Input incorreto.");
+            }
+            t.setTopoExec(t.getTopoExec()+1);
         }
     }//GEN-LAST:event_terminalTextKeyReleased
 

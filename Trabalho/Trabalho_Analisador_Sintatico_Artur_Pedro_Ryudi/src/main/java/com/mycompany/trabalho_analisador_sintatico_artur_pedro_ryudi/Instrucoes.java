@@ -186,12 +186,13 @@ public class Instrucoes {
     }
 
     public static void jmp(Tela2 t, int endereco){
-        t.setPonteiroExec(endereco-1);
+        t.setPonteiroExec(endereco);
     }
 
     public static void rea(Tela2 t, Terminal terminal, int tipo){
         terminal.askInput();
         terminal.requestFocus();
+        t.setCheckpintRea(t.getPonteiroExec()+1);
         t.setPonteiroExec(t.getPonteiroExec()+1);
         if(t.getPilhaTipos().get(t.getTopoExec()-2) != tipo){
             erroSemantico = "Runtime error: Input incorreto.";
@@ -334,6 +335,9 @@ public class Instrucoes {
     public static String getErroSemantico(){
         return erroSemantico;
     }
-
+    
+    public static void setErroSemantico(String err){
+        erroSemantico = err;
+    }
 
 }
