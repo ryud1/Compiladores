@@ -299,7 +299,7 @@ public class Instrucoes {
 
     public static void str(Tela2 t, int endereco) {
         if(Objects.equals(t.getPilhaTipos().get(endereco-1), t.getPilhaTipos().get(t.getTopoExec()-1))){
-            t.getPilhaExec().set(endereco - 1, Integer.toString(t.getTopoExec()-1));
+            t.getPilhaExec().set(endereco - 1, t.getPilhaExec().get(t.getTopoExec()-1));
             t.setTopoExec(t.getTopoExec() - 1);
             t.getPilhaExec().removeLast();
             t.getPilhaTipos().removeLast();
