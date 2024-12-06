@@ -141,7 +141,7 @@ public class Ações {
                     ||as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getCategoria().equals("4")){
                         as.addAreaInstrucoes(as.getPonteiro(), "REA", as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getCategoria());
                         as.setPonteiro(as.getPonteiro()+1);
-                        as.addAreaInstrucoes(as.getPonteiro(), "STR",Float.toString(as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getAtributo()));
+                        as.addAreaInstrucoes(as.getPonteiro(), "STR",Integer.toString(as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getAtributo()));
                         as.setPonteiro(as.getPonteiro()+1);
                     }else{
                         //erro:  “identificador de programa ou de constante”
@@ -163,7 +163,7 @@ public class Ações {
             ||as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getCategoria().equals("2")
             ||as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getCategoria().equals("3")
             ||as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getCategoria().equals("4")){
-                as.addAreaInstrucoes(as.getPonteiro(), "STR",Float.toString(as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getAtributo()));
+                as.addAreaInstrucoes(as.getPonteiro(), "STR",Integer.toString(as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getAtributo()));
                 as.setPonteiro(as.getPonteiro()+1);
             }else{
                 //erro:  “identificador de programa ou de constante”
@@ -192,7 +192,7 @@ public class Ações {
         if(as.existTabelaSimbolos(as.getCurrentTokenImage())){
             if(!as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage()).getCategoria().equals("0")){
                 Simbolo curToken = as.getKeySimbolTabelaSimbolos(as.getCurrentTokenImage());
-                as.addAreaInstrucoes(as.getPonteiro(), "LDV", Float.toString(curToken.getAtributo()));
+                as.addAreaInstrucoes(as.getPonteiro(), "LDV", Integer.toString(curToken.getAtributo()));
                 as.setPonteiro(as.getPonteiro()+1);
             }else{
                 //erro: "identificador de programa"

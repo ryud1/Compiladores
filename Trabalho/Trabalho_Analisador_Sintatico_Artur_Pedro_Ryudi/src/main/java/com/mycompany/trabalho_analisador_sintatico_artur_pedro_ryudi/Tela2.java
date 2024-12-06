@@ -55,15 +55,15 @@ import java.util.ArrayList;
      private ArrayList<String> pilhaExec = new ArrayList<>();
 
      private ArrayList<Integer> pilhaTipos = new ArrayList<>();
-     
+
+     private ArrayList<Instrucao> codigoIntermediario = new ArrayList<>();
+
      private int ponteiroExec = 1, topoExec = 0;
 
      private String returnTerminal = "";
 
-
      public void setReturnTerminal(String text){
         this.returnTerminal = text;
-        terminal.append("\n\nResposta: " + text);
      }
 
      public String getPathSaved(){
@@ -546,6 +546,7 @@ import java.util.ArrayList;
                          telaCodigoIntermediario.addRow(Integer.toString(i.getNumero()), i.getCodigo(), i.getParam());
                      }
                      terminal.setText("Compilado com sucesso!");
+                     codigoIntermediario = analisadorSemantico.getAreaInstrucoes();
                      return true;
                  }
                  analisadorSintatico.limpaListaErros();
@@ -755,25 +756,129 @@ import java.util.ArrayList;
  
 
     private void executaFunction(){
+        pilhaExec.clear();
+        pilhaTipos.clear();
+        topoExec = 0;
+        ponteiroExec = 1;
         Terminal terminal = new Terminal(this);
         terminal.setVisible(true);
+        terminal.requestFocus();
+        for(int i = 0;i<=codigoIntermediario.size();i++){
+            if(Instrucoes.getErroSemantico().equals("")){
+                switch(codigoIntermediario.get(i).getCodigo()){
+                    case "ADD":
+                    Instrucoes.add(this);
+                    break;
+                    case "ALB":
+                    Instrucoes.alb(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    break;
+                    case "ALI":
+                    Instrucoes.ali(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    break;
+                    case "ALR":
+                    Instrucoes.alr(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    break;
+                    case "ALS":
+                    Instrucoes.als(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    break;
+                    case "AND":
+                    Instrucoes.and(this);
+                    break;
+                    case "BGE":
+                    Instrucoes.bge(this);
+                    break;
+                    case "BGR":
+                    Instrucoes.bgr(this);
+                    break;
+                    case "DIF":
+                    Instrucoes.dif(this);
+                    break;
+                    case "DIV":
+                    Instrucoes.div(this);
+                    break;
+                    case "EQL":
+                    Instrucoes.eql(this);
+                    break;
+                    case "JMF":
+                    Instrucoes.jmf(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    break;
+                    case "JMP":
+                    Instrucoes.jmp(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    break;
+                    case "JMT":
+                    Instrucoes.jmt(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    break;
+                    case "LDV":
+                    Instrucoes.ldv(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    break;
+                    case "LDB":
+                    Instrucoes.ldb(this,codigoIntermediario.get(i).getParam());
+                    break;
+                    case "LDI":
+                    Instrucoes.ldi(this,codigoIntermediario.get(i).getParam());
+                    break;
+                    case "LDR":
+                    Instrucoes.ldr(this,codigoIntermediario.get(i).getParam());
+                    break;
+                    case "LDS":
+                    Instrucoes.lds(this,codigoIntermediario.get(i).getParam());
+                    break;
+                    case "MUL":
+                    Instrucoes.mul(this);
+                    break;
+                    case "NOT":
+                    Instrucoes.not(this);
+                    break;
+                    case "OR":
+                    Instrucoes.or(this);
+                    break;
+                    case "REA":
+                    Instrucoes.rea(this,terminal,Integer.parseInt(codigoIntermediario.get(i).getParam()));
+                    break;
+                    case "SME":
+                    Instrucoes.sme(this);
+                    break;
+                    case "SMR":
+                    Instrucoes.smr(this);
+                    break;
+                    case "STR":
+                    Instrucoes.str(this,Integer.parseInt(codigoIntermediario.get(i).getParam()));
+                    break;
+                    case "SUB":
+                    Instrucoes.sub(this);
+                    break;
+                    case "WRT":
+                    Instrucoes.wrt(this,terminal);
+                    break;
+                    case "STC":
+                    Instrucoes.stc(this,Integer.valueOf(codigoIntermediario.get(i).getParam()));
+                    break;
+                    case "STP":
+                    this.terminal.append("\nExecutado com sucesso!");
+                    break;
+                }
+            }else{
+                break;
+            }
+        }
     }
-     private void painelEditavelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelEditavelMouseClicked
-         Caret pointer = painelEditavel.getCaret();
-         String linhaCount = "";
-         if (pointer.getMagicCaretPosition() != null) {
-             String contador = "Linha: "
-                     + (((pointer.getMagicCaretPosition().y) / 25) + 1)
-                     + " | Coluna: "
-                     + (((pointer.getMagicCaretPosition().x) / 11) + 1);
-             ContadorLC.setText(contador);
-             for(int i = 0;i<painelEditavel.getLineCount();i++){
-                 linhaCount += i+1 + "\n";
-             }
-         }
-         selectPainelEditavel = painelEditavel.getSelectedText();
-         painelEditavel.requestFocus();
-     }//GEN-LAST:event_painelEditavelMouseClicked
+
+    private void painelEditavelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelEditavelMouseClicked
+        Caret pointer = painelEditavel.getCaret();
+        String linhaCount = "";
+        if (pointer.getMagicCaretPosition() != null) {
+            String contador = "Linha: "
+                    + (((pointer.getMagicCaretPosition().y) / 25) + 1)
+                    + " | Coluna: "
+                    + (((pointer.getMagicCaretPosition().x) / 11) + 1);
+            ContadorLC.setText(contador);
+            for(int i = 0;i<painelEditavel.getLineCount();i++){
+                linhaCount += i+1 + "\n";
+            }
+        }
+        selectPainelEditavel = painelEditavel.getSelectedText();
+        painelEditavel.requestFocus();
+    }//GEN-LAST:event_painelEditavelMouseClicked
  
      private void painelEditavelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_painelEditavelKeyReleased
          Caret pointer = painelEditavel.getCaret();

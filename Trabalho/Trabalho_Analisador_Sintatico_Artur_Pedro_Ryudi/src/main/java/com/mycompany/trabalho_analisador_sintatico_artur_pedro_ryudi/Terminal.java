@@ -17,9 +17,10 @@ public class Terminal extends javax.swing.JFrame {
      * Creates new form Terminal
      */
     public Terminal(Tela2 pai) {
-        initComponents();
+        this.initComponents();
         this.pai = pai;
         this.setTitle("Terminal");
+        terminalText.setEditable(false);
         terminalText.setCaretColor(Color.GREEN);
         terminalText.setForeground(Color.GREEN);
         terminalText.setBackground(Color.BLACK);
@@ -31,6 +32,10 @@ public class Terminal extends javax.swing.JFrame {
 
     public void askInput(){
         terminalText.setNavigationFilter(new NavigationFilterPrefix(textoFixoSize,terminalText));
+    }
+
+    public void write(String str){
+        terminalText.append(str);
     }
 
     /**
@@ -101,7 +106,9 @@ public class Terminal extends javax.swing.JFrame {
     private void terminalTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_terminalTextKeyReleased
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             pai.setReturnTerminal(terminalText.getText().substring(textoFixoSize));
+            pai.getPilhaExec().add(pai.getTopoExec()-1,pai.getReturnTerminal());
             terminalText.setEditable(false);
+            pai.requestFocus();
         }
     }//GEN-LAST:event_terminalTextKeyReleased
 
